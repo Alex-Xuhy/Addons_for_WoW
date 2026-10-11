@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# 临时与编辑器
+*.tmp
+~$*
+.vscode/
+.idea/
+
+# 打包产物
+dist/
+*.zip

@@ -1,0 +1,16 @@
+## Interface: 16001
+## Title: 金账簿
+## Notes: 悬停查看其他玩家的金币数字自洽性。只用公开统计量，不判定任何人。
+## Author: 待填
+## Version: 0.1.0
+## SavedVariables: GoldLedgerDB
+## AllowLoadGameType: camelot
+## DefaultState: enabled
+
+Secrets.lua
+Locale.lua
+Config.lua
+Core.lua
+Stats.lua
+Judge.lua
+Commands.lua

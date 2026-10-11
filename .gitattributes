@@ -1,0 +1,13 @@
+# 统一用 LF。Windows 上 core.autocrlf=true 会把行尾改来改去，
+# 显式钉死反而省事，也避免两台机器之间产生假的 diff。
+* text=auto eol=lf
+
+*.lua   text eol=lf
+*.toc   text eol=lf
+*.md    text eol=lf
+
+# 二进制，别碰
+*.gz    binary
+*.tga   binary
+*.png   binary
+*.zip   binary
