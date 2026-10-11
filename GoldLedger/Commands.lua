@@ -135,17 +135,15 @@ local function cmdReset()
     say(string.format("识别到 %d 个。", n))
 end
 
-local function cmdMe()
-    local row = Stats.SelfRow()
-    if not row then
-        say("拿不到自己的身份。")
-        return
-    end
-    header("自己角色的账")
-    say("  等级 " .. tostring(row.level or "—") .. "   " .. tostring(row.name or ""))
+-- 打印一次观测。中文字宽与字节数不一致，所以不对齐补空格。
+local function printRow(row, title)
+    header(title)
+    local who = tostring(row.name or "?")
+    if row.level then who = who .. "（" .. tostring(row.level) .. " 级）" end
+    if row.guild then who = who .. " <" .. row.guild .. ">" end
+    say("  " .. who)
     for _, key in ipairs(Stats.ALL_KEYS) do
-        local field = Stats.FIELD[key]
-        local value = row[field]
+        local value = row[Stats.FIELD[key]]
         local shown
         if value == nil then
             shown = "—（" .. (GL.L.MISSING[row.quality[key]] or "?") .. "）"
@@ -154,19 +152,61 @@ local function cmdMe()
         else
             shown = Stats.FormatCount(value)
         end
-        say(string.format("  %-8s %s", Stats.LABEL[key], shown))
+        say("  " .. Stats.LABEL[key] .. "：" .. shown)
     end
     if row.verdict then
-        say("  判定     " .. GL.Judge.Colored(row.verdict))
+        say("  判定：" .. GL.Judge.Colored(row.verdict))
         local reason = GL.Judge.Reason(row)
-        if reason then say("  理由     " .. reason) end
+        if reason then say("  理由：" .. reason) end
         say("  |cff9aa0a6" .. GL.L.DISCLAIMER .. "|r")
     end
 end
 
+local function cmdMe()
+    local row = Stats.SelfRow()
+    if not row then
+        say("拿不到自己的身份。")
+        return
+    end
+    printRow(row, "自己角色的账")
+end
+
+-- 手动扫描：结果由 Scan.OnReady 异步回来
+local pendingReport = false
+local scanListenerReady = false
+local function ensureScanListener()
+    if scanListenerReady then return end
+    scanListenerReady = true
+    GL.Scan.OnReady(function(_, row, status)
+        if not pendingReport then return end
+        pendingReport = false
+        if row and status == "READY" then
+            printRow(row, "扫描结果")
+        else
+            say("扫描未完成：" .. tostring(GL.L.VERDICT[status] or status))
+        end
+    end)
+end
+
 local function cmdScan()
-    say(GL.L.CMD.SCAN_LATER)
-    say("M4 才实现。现在先用 /gl me 确认自己角色读得准。")
+    if not GL.Scan.HasAPI() then say(GL.L.CMD.NO_API) return end
+    local id = GL.Core.Identity("target")
+    if not id then say("先选一个目标。") return end
+    if id.isSelf then say("这是你自己，用 /gl me。") return end
+    if not id.isPlayer then say("目标是 NPC。") return end
+
+    ensureScanListener()
+    pendingReport = true
+    local row, status = GL.Scan.Request("target", true, true)
+    if row then
+        pendingReport = false
+        printRow(row, "扫描结果（缓存）")
+    elseif status == "PENDING" then
+        say("扫描中…（最多 15 秒）")
+    else
+        pendingReport = false
+        say("扫描未能开始：" .. tostring(GL.L.VERDICT[status] or status))
+    end
 end
 
 local function cmdExport()
@@ -191,9 +231,12 @@ local function cmdHelp()
     say("  /gl reset         清除手动绑定并重新识别")
     say("  /gl export        导出手动绑定")
     say("  /gl me            查看自己角色的账")
-    say("  /gl scan          扫描目标（M4）")
-    say("  /gl hover on|off  悬停扫描开关（默认开）")
-    say("  /gl retain on|off 留存档案开关（默认关）")
+    say("  /gl scan          扫描当前目标（最多等 15 秒）")
+    say("  /gl hover on|off        悬停扫描开关（默认开）")
+    say("  /gl hoverself on|off    悬停自己时也显示（默认关）")
+    say("  /gl tip on|off          tooltip 里的免责声明（默认开）")
+    say("  /gl retain on|off       留存档案开关（默认关）")
+    say("  /gl clear               清空会话缓存")
     say("  /gl help          这条")
     say("")
     say("|cff9aa0a6只用公开统计量；不发送任何消息；" .. GL.L.DISCLAIMER .. "|r")
@@ -223,6 +266,20 @@ local function handler(input)
             local v = args[2] == "on" and true or args[2] == "off" and false
             if v == nil then say("用法：/gl hover on|off") else
                 GL.Config.Set("hover", v); say("悬停扫描：" .. (v and "开" or "关")) end
+        elseif cmd == "hoverself" then
+            local v = args[2] == "on" and true or args[2] == "off" and false
+            if v == nil then say("用法：/gl hoverself on|off") else
+                GL.Config.Set("hoverSelf", v); say("悬停自己显示：" .. (v and "开" or "关")) end
+        elseif cmd == "tip" then
+            local v = args[2] == "on" and true or args[2] == "off" and false
+            if v == nil then say("用法：/gl tip on|off") else
+                GL.Config.Set("tipDisclaimer", v)
+                say("tooltip 免责声明：" .. (v and "开" or "关"))
+                if not v then say("|cffc0392b关掉之后，判定词会单独出现，容易被误读成结论。|r") end
+            end
+        elseif cmd == "clear" then
+            GL.Scan.Clear()
+            say("会话缓存已清空。")
         elseif cmd == "retain" then
             local v = args[2] == "on" and true or args[2] == "off" and false
             if v == nil then say("用法：/gl retain on|off") else

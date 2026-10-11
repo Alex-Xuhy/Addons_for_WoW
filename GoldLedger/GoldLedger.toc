@@ -13,4 +13,6 @@ Config.lua
 Core.lua
 Stats.lua
 Judge.lua
+Scan.lua
+Tooltip.lua
 Commands.lua

@@ -12,10 +12,12 @@ GL.Config = Config
 
 Config.DEFAULTS = {
     -- 交互
-    hover       = true,      -- 悬停扫描（核心交互，默认开）
-    retain      = false,     -- ⚠️ 留存档案默认【关】——扫描 ≠ 留存
-    minimap     = true,
-    loginLine   = true,      -- 每次登录打一行自己的账
+    hover         = true,    -- 悬停扫描（核心交互，默认开）
+    hoverSelf     = false,   -- 悬停自己也显示（默认关；自己的数据直接读，不走扫描）
+    retain        = false,   -- ⚠️ 留存档案默认【关】——扫描 ≠ 留存
+    tipDisclaimer = true,    -- tooltip 里显示免责声明（默认开，这是有意的）
+    minimap       = true,
+    loginLine     = true,    -- 每次登录打一行自己的账
 
     -- 判定：容差
     slackPct    = 0.10,      -- 容差 = 峰值的 10%
