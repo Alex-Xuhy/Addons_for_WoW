@@ -1,0 +1,618 @@
+001	  |  %d categories	  |  %d 个分类
+002	  |  %d match	  |  %d 条匹配
+003	  |  Hover %s  |  %d fresh	  |  悬停 %s  |  %d 条新近
+004	 (display only)	（仅展示）
+005	 (partial)	（部分）
+006	 A dash means no value, not zero: hover it to see whether the game reported nothing or this client has no such statistic. Rescan refreshes the nearby player.	“—”表示无值而非零：悬停可查看是游戏未上报，还是本客户端没有该统计项。重新扫描可刷新附近玩家。
+007	 Grimlight Auctions confirms %s retained sales worth %s after cuts.	Grimlight 拍卖行数据确认 %s 笔留存成交，扣除手续费后价值 %s。
+008	 Grimlight never counts the missing part as income or as a gap on its own.	Grimlight 从不把缺失的部分计作收入，也不单独把它算成缺口。
+009	 Grimlight's checks read this counter.	Grimlight 的检查会读取这个计数器。
+010	 Income from the counters that were not reported also lands here.	未上报的计数器所带来的收入也归入此处。
+011	 Not counted as recorded income.	不计入已记录收入。
+012	 Public counters can be incomplete. Drag this bar to move the window.	公开计数器可能不完整。拖动此条可移动窗口。
+013	 The client returned no value for this player.	客户端没有为该玩家返回数值。
+014	 Total acquired rose %s in the same span.	同一区间内获得总量上涨了 %s。
+015	 since %s	自 %s 起
+016	%.1fx median	中位数的 %.1f 倍
+017	%d found	找到 %d 条
+018	%d level groups; click a level to see its players	%d 个等级分组；点击某个等级查看该等级的玩家
+019	%d logged	已记录 %d 条
+020	%d of %d	%d / %d
+021	%d of %d statistics reported	%d / %d 项统计已上报
+022	%d of 5 readable	%d / 5 项可读
+023	%d players. Mean peak %s; median %s (n=%d). Mean public income %s (n=%d). Missing values are excluded. Displayed averages round to two decimals in the shown currency. Income is incomplete public counters. Latest saved observation each, including old scans; this is not a server average. Click a known level to filter players.	%d 名玩家。平均峰值 %s；中位数 %s（n=%d）。平均公开收入 %s（n=%d）。缺失值已排除。显示的均值按当前货币单位保留两位小数。收入取自不完整的公开计数器。每人取最近一次已保存观测，包含较早的扫描；这不是服务器均值。点击已知等级可筛选玩家。
+024	%d scanned	已扫描 %d 个
+025	%d unexplained rise totalling %s (%s)	%d 次无法解释的上涨，合计 %s（%s）
+026	%d unexplained rises totalling %s (%s, first)	%d 次无法解释的上涨，合计 %s（%s，最早）
+027	%d%s %d%s %d%s	%d%s %d%s %d%s
+028	%d-%d of %d players	第 %d-%d 名，共 %d 名玩家
+029	%d/%d activity counters readable	%d / %d 项活动计数器可读
+030	%d/%d counters readable. %s	%d / %d 项计数器可读。%s
+031	%s %s	%s %s
+032	%s (display only)	%s（仅展示）
+033	%s (highest)	%s（最高）
+034	%s (local time)	%s（本地时间）
+035	%s and %s	%s 和 %s
+036	%s income not reported	%s 收入未上报
+037	%s skill	%s 技能
+038	%s | peak %s | income %s | gap %s | build %s	%s | 峰值 %s | 收入 %s | 缺口 %s | 构建 %s
+039	%s/%s numeric; %s display only	%s/%s 为数值；%s 仅展示
+040	%s: %s (%d/%d)	%s：%s（%d/%d）
+041	%s: %s (%s)	%s：%s（%s）
+042	%s: %s (confidence %s)	%s：%s（置信度 %s）
+043	%s: %s%s	%s：%s%s
+044	%s: peak rose %s, itemized income rose %s; %s unexplained.	%s：峰值上涨 %s，已分项收入上涨 %s；%s 无法解释。
+045	(saved)	（已保存）
+046	, 	、
+047	. Quests, looted coin, vendor and auction counters count as recorded income; the not-itemized share is shown but never counted. Hover a line for its confidence and source.	。任务、拾取金币、卖店和拍卖计数器都计入已记录收入；未分项的部分会展示，但从不计入。悬停某一行可查看它的置信度与来源。
+048	. Quests, looted coin, vendor and auction counters, plus your firsthand log, count as recorded income; the not-itemized share is shown but never counted. Hover a line for its confidence and source.	。任务、拾取金币、卖店和拍卖计数器，加上你自己的第一手日志，都计入已记录收入；未分项的部分会展示，但从不计入。悬停某一行可查看它的置信度与来源。
+049	10-player raids entered	进入 10 人团队副本的次数
+050	20-player raids entered	进入 20 人团队副本的次数
+051	40-player raids entered	进入 40 人团队副本的次数
+052	A consistency score compares recorded income and activity with observed wealth. Transfers between your own characters, gifts and incomplete game counters lower it too. Unexplained is not proof of RMT.	一致性评分把已记录收入与活动度和观测到的财富做比较。自己角色之间的转移、赠予，以及不完整的游戏计数器，同样会拉低评分。无法解释不等于 RMT 的证据。
+053	A counter decreased; a reset or incomplete record prevents comparison.	某项计数器下降；重置或记录不完整导致无法比较。
+054	A public player level is required for this comparison.	此对比需要玩家公开等级。
+055	A second saved scan is needed to compare changes.	需要第二次已保存的扫描才能比较变化。
+056	%dh ago	%d 小时前
+057	%dm ago	%d 分钟前
+058	<1m ago	不到 1 分钟
+059	AH counter (partial)	拍卖行计数器（部分）
+060	About %d%% explained (partial: %s)	约 %d%% 可解释（部分：%s）
+061	About %d%% of observed wealth is explained by recorded income	观测财富中约 %d%% 可由已记录收入解释
+062	Above income	高于收入
+063	Acquired	获得
+064	Activity	活动
+065	Activity areas	活动区域
+066	Activity recorded in %d of %d areas	已在 %d / %d 个区域记录到活动
+067	Activity shows play that is on record, not time played. Skill counters may be historical; other players' wallets and private trade records are unavailable.	活动度展示的是有记录的游戏行为，不是在线时长。技能类计数器可能是历史值；其他玩家的钱包和私下交易记录无法获取。
+068	Activity unavailable	活动数据不可用
+069	Activity: no activity counters readable	活动：没有可读的活动计数器
+070	Adds up	对得上
+071	After auction cuts	扣除拍卖手续费后
+072	Alchemy	炼金术
+073	All characters retained; 20 observations each.	保留全部角色；每个角色 20 份观测。
+074	All characters retained; twenty observations each.	保留全部角色；每个角色二十份观测。
+075	All counters	全部计数器
+076	All saved player statistics	全部已保存的玩家统计
+077	All saved players	全部已保存玩家
+078	All scanned players	全部已扫描玩家
+079	All scanned players by level	按等级查看全部已扫描玩家
+080	All scans: mean peak %s; median %s; range %s-%s (n=%d)\nMean public income %s (n=%d); %d/%d readable gold rows; %d fresh.	全部扫描：平均峰值 %s；中位数 %s；区间 %s-%s（n=%d）\n平均公开收入 %s（n=%d）；%d/%d 行金币数据可读；%d 条新近。
+081	Also: %s	另有：%s
+082	An area is recorded when at least one of its counters is above zero; skills require a rank above 1. Related counters count as one area. No gold amount, income gap, elapsed time or missing value affects this assessment. These are descriptive rules, not calibrated thresholds.	当某个区域的计数器至少有一个大于零时，该区域即记为已记录；技能类需要等级高于 1。相关计数器合并算作一个区域。金币数额、收入缺口、时间长短和缺失值都不影响这一评估。这些是描述性规则，不是标定过的阈值。
+083	Assessment: %s	评估：%s
+084	Auction activity	拍卖活动
+085	Auction counters	拍卖计数器
+086	Auction coverage	拍卖覆盖率
+087	Auction cuts	拍卖手续费
+088	Auction income is undercounted on this client, so part of this gap may be auction sales.	本客户端会低估拍卖收入，因此这个缺口里可能有一部分是拍卖所得。
+089	Auction invoice	拍卖发票
+090	Auction journal failed validation	拍卖流水未通过校验
+091	Auction journal is not a complete retained list	拍卖流水不是完整的留存清单
+092	Auction journal unavailable	拍卖流水不可用
+093	Auction journal version or validation unavailable	拍卖流水的版本或校验不可用
+094	Auction purchases	拍卖购买
+095	Auctions	拍卖
+096	Auctions posted	拍卖上架
+097	Average earned per day	平均每日获得
+098	Awaiting sale invoice	等待成交发票
+099	Copy report	复制报告
+100	More	更多
+101	Rescan	重新扫描
+102	Back to catalogue	返回目录
+103	Back to players	返回玩家列表
+104	Bandages used	使用绷带
+105	Bank slots purchased	购买的银行栏位
+106	Barber shops	理发店
+107	Battlegrounds played	参与战场
+108	Battlegrounds won	战场获胜
+109	Below activity baseline; partial coverage	低于活动基线；覆盖率不完整
+110	Blacksmithing	锻造
+111	Bounded mode uses your existing player limit and evicts oldest records on the next capture. All mode keeps every character; each retains 20 observations.	有界模式沿用你现有的玩家上限，并在下次捕获时淘汰最旧的记录。全部模式保留每一个角色；每个角色保留 20 份观测。
+112	Bounded retention enabled; oldest characters are evicted at the next capture.	已启用有界留存；下次捕获时会淘汰最旧的角色。
+113	Bounded retention: %s characters	有界留存：%s 个角色
+114	By Veruca Grimlight	作者：Veruca Grimlight
+115	By level	按等级
+116	c	铜
+117	g	金
+118	s	银
+119	Capacity: %s players; oldest observations are evicted when full.	容量：%s 名玩家；满时淘汰最旧的观测。
+120	Cash on delivery	货到付款
+121	Category %s	分类 %s
+122	Change in a measurement, not earnings or profit.	测量值的变化，不是收益或利润。
+123	Changed fields	发生变化的字段
+124	Changes from preceding retained capture	与上一次留存捕获相比的变化
+125	Choose /ggs skin grimlight or /ggs skin native.	选择 /ggs skin grimlight 或 /ggs skin native。
+126	Choose scale 0.6 to 1.6, or reset.	选择 0.6 至 1.6 的缩放，或重置。
+127	Class: %s	职业：%s
+128	Clear	清空
+129	Clear search	清除搜索
+130	Click a history row to read that observation. Browsing saved observations sends no request.	点击某一行历史记录即可查看那次观测。浏览已保存的观测不会发出任何请求。
+131	Click to cycle: scan time, name, level, peak, public income, gap, scan count and verdict. Column headings also sort. Unknown values stay last in both directions.	点击可切换排序：扫描时间、名字、等级、峰值、公开收入、缺口、扫描次数与判定。点击列标题也可排序。未知值在两个方向上都排在最后。
+132	Client build	客户端构建
+133	Client build or source format changed; changes are unavailable.	客户端构建或数据源格式已变化；变化对比不可用。
+134	Client build: %s	客户端构建：%s
+135	Client statistics list	客户端统计列表
+136	Close	关闭
+137	Collections and gear	收藏与装备
+138	Combat	战斗
+139	Combine words or filters: name:alex class:hunter guild:example verdict:gap verdict:closer level:20-30. Verdict filters match the tooltip verdict and the consistency verdict (adds, mostly, closer, doesnt, nodata). Searches your local catalogue; it does not search the server.	组合词语或过滤器：name:alex class:hunter guild:example verdict:gap verdict:closer level:20-30。判定过滤器匹配提示框判定与一致性判定（adds、mostly、closer、doesnt、nodata）。只搜索你的本地目录，不搜索服务器。
+140	Comparable fields	可比较字段
+141	Compared with the preceding retained capture. More > Detailed changes shows each field and its limits. Copies include all changes. No transactions or profit are inferred.	与上一次留存捕获相比。更多 > 详细变化 会列出每个字段及其局限。复制的内容包含全部变化。不推断任何交易或利润。
+142	Comparison API unavailable	对比接口不可用
+143	Comparison is busy. Close Achievements or wait, then Rescan.	对比通道正被占用。关闭成就界面或稍等，然后重新扫描。
+144	Comparison statistics	对比统计
+145	Comparison statistics are unavailable on this client.	本客户端上对比统计不可用。
+146	Confidence %s	置信度 %s
+147	Confidence %s: %s%% of the factor weight had data. Below %d%% the verdict is Not enough data.\n	置信度 %s：%s%% 的因子权重有数据。低于 %d%% 时判定为「数据不足」。\n
+148	Confidence: %s. %s	置信度：%s。%s
+149	Confirmed invoices	已确认发票
+150	Consistency	一致性
+151	Consistency: %s | score %s | confidence %s (%d%%)	一致性：%s | 评分 %s | 置信度 %s（%d%%）
+152	Cooking	烹饪
+153	Cooking daily quests	完成烹饪日常任务
+154	Counted elsewhere	已在别处计入
+155	Counter changes	计数器变化
+156	Counter decreased; change is not comparable.	计数器下降；变化不可比较。
+157	Counter increase between these observations; not a transaction ledger.	这是两次观测之间计数器的增量，不是交易流水。
+158	Created by Veruca Grimlight	作者：Veruca Grimlight
+159	Creatures killed	消灭怪物数量
+160	Critters killed	消灭小动物数量
+161	Current character only	仅当前角色
+162	Current-character journal	当前角色流水
+163	Daily income	每日收入
+164	Damage done	造成的伤害
+165	Damage received	受到的伤害
+166	Data quality	数据质量
+167	Dealings logged	已记录往来
+168	Deaths	死亡次数
+169	Deaths to players	被玩家消灭
+170	Detailed changes: %s	详细变化：%s
+171	Different or unknown build/source.	构建或数据源不同或未知。
+172	Disenchant materials are outputs, not additional destroyed items.	分解材料是产出物，不是另外被摧毁的物品。
+173	Disenchanting	分解
+174	Doesn't add up	对不上
+175	Down	下降
+176	Drag: Move this button	拖动：移动此按钮
+177	Drinks consumed	饮用饮料
+178	Duels lost	决斗失败
+179	Duels won	决斗获胜
+180	Dungeons	地下城
+181	Dungeons entered	进入地下城
+182	Elixirs consumed	饮用药剂
+183	Enchanting	附魔
+184	Engineering	工程学
+185	Epic items acquired	获得史诗物品
+186	Epic items equipped	装备史诗物品
+187	Epic items looted	拾取史诗物品
+188	Every public statistic the client returned for this player, in the client's own categories. A dash means the client gave no value; it is not zero. Hover a line for its statistic number.	客户端为该玩家返回的每一条公开统计，按客户端自己的分类排列。“—”表示客户端没有给出数值，它不等于零。悬停某一行可查看它的统计编号。
+189	Every public statistic the client returned, grouped by category and searchable.	客户端返回的每一条公开统计，按分类分组，可搜索。
+190	Exact amounts: %s	精确金额：%s
+191	Exact: %s	精确：%s
+192	Factions at Exalted	达到崇拜的声望
+193	Factions encountered	接触的阵营
+194	Factor	因子
+195	Factor score %d / 100, weight %s of 100.	因子得分 %d / 100，权重 %s（满分 100）。
+196	Fewer than %d of the four income counters (quests, looted coin, vendor, auctions) are reported.	四个收入计数器（任务、拾取金币、卖店、拍卖）中已上报的少于 %d 个。
+197	First Aid	急救
+198	First and latest	最早与最近
+199	First retained sale	首笔留存成交
+200	First saved	首次保存
+201	Firsthand log %s; %d entries for this character.	第一手日志 %s；此角色有 %d 条记录。
+202	Firsthand log cleared for this character.	已清除此角色的第一手日志。
+203	Firsthand log: %s	第一手日志：%s
+204	Firsthand log: records money that moves between you and a named player through trades, mail, cash on delivery and auction invoices, for this character only. Off by default; nothing is sent or announced.	第一手日志：记录你与具名玩家之间通过交易、邮件、货到付款和拍卖发票流动的金币，仅限此角色。默认关闭；不发送也不公告任何内容。
+205	Firsthand: no dealings in your log	第一手：日志中没有往来
+206	Fish and other catches	钓到的鱼与其他东西
+207	Fish caught	钓到的鱼
+208	Fishing	钓鱼
+209	Fishing daily quests	完成钓鱼日常任务
+210	Flags	旗帜
+211	Flasks consumed	饮用合剂
+212	Flight paths taken	乘坐的飞行路线
+213	Food consumed	食用食品
+214	Forget all	全部遗忘
+215	Full statistics list	完整统计列表
+216	Game auction counter; incomplete on this client, so it can undercount.	游戏拍卖计数器；本客户端上不完整，因此可能少计。
+217	Game counter: gold from quest rewards.	游戏计数器：任务奖励所得的金币。
+218	Game counter: gold from vendors.	游戏计数器：卖店所得金币。
+219	Game counter: gold looted.	游戏计数器：拾取的金币。
+220	Gameplay	玩法
+221	Gap	缺口
+222	GetStatistic is not available on this client.	本客户端没有 GetStatistic。
+223	Gold / auction posting	金币 / 拍卖上架
+224	Gold / quest	金币 / 任务
+225	Gold fields	金币字段
+226	Gold origin	金币来源
+227	Gold origin: %s	金币来源：%s
+228	Gold report	金币报告
+229	Greed rolls	贪婪掷骰
+230	Grimlight (default) is the shared Grimlight design: ink panels, bone text and a brass accent, matching every Grimlight add-on. Native follows the default game windows: stone background, metal border, portrait, gold headings and bottom tabs. Switching rebuilds the open window.	Grimlight（默认）是统一的 Grimlight 设计：墨色面板、骨白文字与黄铜点缀，与各 Grimlight 插件一致。Native 沿用游戏默认窗口：石质背景、金属边框、肖像、金色标题与底部标签页。切换会重建当前打开的窗口。
+231	Grimlight Auctions is not loaded	Grimlight Auctions 未加载
+232	Grimlight Auctions: retained successful sale invoices for this character only. Ages use sale observation times. Older or unseen sales are unknown. Mail amounts include returned deposits; after-cut proceeds are not profit or proof of collection. These figures are separate from public lifetime counters and never added to them.	Grimlight Auctions：仅为本角色留存成功的成交发票。时长按成交观测时间计算。较早或未见的成交未知。邮件金额包含退还的保证金；扣手续费后的所得不是利润，也不证明已收取。这些数字与公开的终身计数器相互独立，绝不并入。
+233	Gross sale prices	成交毛价
+234	Guild: %s	公会：%s
+235	Healing done	造成的治疗
+236	Healing received	受到的治疗
+237	Health potions consumed	饮用治疗药水
+238	Healthstones used	使用治疗石
+239	Hearthstone uses	使用炉石
+240	Herbalism	草药学
+241	High	高
+242	Highest ranks are historical and may refer to unlearned professions. Other skill counters are as reported at capture time; neither proves a currently learned profession.	最高等级是历史值，可能指向已遗忘的专业。其他技能计数器为捕获时的上报值；两者都不能证明当前已学会某专业。
+243	Highest skill ranks can refer to unlearned professions. Skill counters do not prove current professions.	最高技能等级可能指向已遗忘的专业。技能计数器不能证明当前专业。
+244	Historical counters describe recorded activity, not who controls a character or whether rules were followed. Missing counters are unknown.	历史计数器描述的是有记录的活动，不代表谁在操控角色，也不代表是否遵守规则。缺失的计数器视为未知。
+245	Historical observation	历史观测
+246	History	历史
+247	Honorable kills	荣誉消灭
+248	Identity hidden	身份已隐藏
+249	Identity unavailable	身份不可用
+250	Income	收入
+251	Income coverage	收入覆盖率
+252	Income coverage is the bar above; hover a factor for its numbers. Unexplained is not proof of RMT.	收入覆盖率即上方进度条；悬停任一因子可查看其数字。无法解释不等于 RMT 的证据。
+253	Income coverage: %s	收入覆盖率：%s
+254	Incomplete	不完整
+255	Incomplete counters prevent a reliable change comparison.	计数器不完整，无法进行可靠的变化比较。
+256	Items destroyed and materials produced are separate counts, not two sets of crafting actions.	摧毁的物品与产出的材料是两个独立计数，不是两组制作动作。
+257	Items disenchanted	分解物品
+258	Killing blows	消灭总数
+259	Kills granting experience or honor	击败并获得经验/荣誉的总数
+260	Larger	较大
+261	Largest bid	最高出价
+262	Largest gross sale	单笔最高成交毛价
+263	Largest sale	单笔最高成交
+264	Latest retained sale	最近一笔留存成交
+265	Latest saved	最近保存
+266	Latest saved observation per player. Peak mean %s; median %s; range %s to %s (%d known). Public income mean %s (%d known). %d of %d rows have five readable gold values; %d are fresh. Readable does not mean complete income. These are local samples, not server averages.	每位玩家的最近一次已保存观测。峰值均值 %s；中位数 %s；区间 %s 至 %s（%d 个已知）。公开收入均值 %s（%d 个已知）。%d / %d 行有五个可读金币值；%d 条新近。可读不代表收入完整。这些是本地样本，不是服务器平均值。
+267	Leatherworking	制皮
+268	Leave combat, then Rescan to request statistics.	离开战斗，然后重新扫描以请求统计。
+269	Leave combat, then hover again to retry.	离开战斗，然后再次悬停以重试。
+270	Left-click: Open the catalogue	左键：打开目录
+271	Left-click: player details. Right-click: print locally.	左键：玩家详情。右键：在本地打印。
+272	Legendary items acquired	获得传说物品
+273	Level	等级
+274	Level %s	%s 级
+275	Level unavailable	等级不可用
+276	Level: %s	等级：%s
+277	Local comparison	本地对比
+278	Local saved history	本地保存的历史
+279	Look: %s (Grimlight design)	外观：%s（Grimlight 设计）
+280	Look: %s (default game style)	外观：%s（游戏默认风格）
+281	Looted	拾取
+282	Looted coin	拾取金币
+283	Low	低
+284	Lvl	等级
+285	Mage portals taken	使用法师传送门
+286	Mail	邮件
+287	Mail and trades	邮件与交易
+288	Mana potions consumed	饮用法力药水
+289	Materials produced	产出的材料
+290	Mean gross / sale	单笔平均毛价
+291	Mean income	平均收入
+292	Mean peak	峰值均值
+293	Median peak	峰值中位数
+294	Medium	中
+295	Mining	采矿
+296	Missing numeric value.	缺少数值。
+297	More	更多
+298	Mostly adds up	大体对得上
+299	Mounts owned	拥有的坐骑
+300	My report	我的报告
+301	Name	名字
+302	Native	游戏默认
+303	Need rolls	需求掷骰
+304	Needs 2 scans	需要 2 次扫描
+305	Needs a closer look	需要细看
+306	Needs two comparable observations	需要两次可比较的观测
+307	No activity above baseline	没有活动高于基线
+308	No activity above returned baselines	没有活动高于返回的基线
+309	No answer from the client. Hover again to retry.	客户端没有应答。再次悬停以重试。
+310	No answer from the client. Keep the player nearby and Rescan.	客户端没有应答。请让该玩家留在附近并重新扫描。
+311	No counters	没有计数器
+312	No current-character auction journal	没有当前角色的拍卖流水
+313	No data	无数据
+314	No data, so its weight (%s) is left out of the score and lowers confidence instead.	无数据，因此其权重（%s）不计入评分，转而降低置信度。
+315	No level observations yet	还没有等级观测
+316	No match for \"%s\".	没有匹配“%s”的记录。
+317	No players scanned yet	尚未扫描任何玩家
+318	No players scanned yet. Hover a player to scan them.	尚未扫描任何玩家。悬停某位玩家即可扫描。
+319	No previous observation.	没有上一次观测。
+320	No readable statistics returned. Saved observations were preserved.	未返回可读的统计。已保存的观测予以保留。
+321	No readable statistics returned. Saved results remain visible; try Rescan later.	未返回可读的统计。已保存的结果仍然可见；请稍后重新扫描。
+322	No safely readable observation	没有可安全读取的观测
+323	No saved statistics	没有已保存的统计
+324	No saved statistics yet. Keep the player nearby and choose Rescan. 	尚无已保存的统计。让该玩家留在附近并选择重新扫描。
+325	No separate game counter. Crafted goods sold reach the vendor or auction counters. %d primary profession ranks recorded.	没有单独的游戏计数器。售出的制成品会计入卖店或拍卖计数器。已记录 %d 项主专业技能等级。
+326	No unexplained rises across %d comparable observation pair	在 %d 组可比较观测中没有无法解释的上涨
+327	No unexplained rises across %d comparable observation pairs	在 %d 组可比较观测中没有无法解释的上涨
+328	No valid time was recorded for this (missing, zero or before 2004). It is unknown, not a date.	没有为该观测记录到有效时间（缺失、为零或早于 2004 年）。它是未知，不是日期。
+329	No value reported by the game	游戏未上报任何数值
+330	None	无
+331	None in %d comparable pairs	%d 组可比较观测中均无
+332	None in %d pair	%d 组可比较观测中均无
+333	None in %d pairs	%d 组可比较观测中均无
+334	None logged	没有记录
+335	Not enough data	数据不足
+336	Not enough data: %s	数据不足：%s
+337	Not itemized (not counted): %s	未分项（不计入）：%s
+338	Not reported	未上报
+339	Not reported for this player, so it stays unknown, not zero. Coverage is computed from the other counters and marked partial. 	游戏未为此玩家上报，因此它保持未知，而不是零。覆盖率由其他计数器计算，并标记为部分。
+340	Not saved	未保存
+341	Not visible for other players. Part of it can sit in the not-itemized amount below.	其他玩家不可见。其中一部分可能计入下方的未分项金额。
+342	Observation already retained.	观测已留存。
+343	Observation saved locally.	观测已保存到本地。
+344	Observation times do not increase.	观测时间未递增。
+345	Observation times must increase before changes can be compared.	观测时间必须递增，才能比较变化。
+346	Observations saved before v0.9.0, and retained history entries, keep only the counters Grimlight's checks use.	v0.9.0 之前保存的观测，以及留存的历史条目，只保留 Grimlight 检查所需的计数器。
+347	Observed	观测值
+348	Observed wealth (larger of peak, or spending plus wallet): %s	观测财富（取峰值，或支出加钱包中的较大者）：%s
+349	Observed wealth is below %s; too small to compare.	观测财富低于 %s；太少，无法比较。
+350	Observed: %s	观测值：%s
+351	Older observation	较早的观测
+352	Older observations have no client build; changes are unavailable.	较早的观测没有客户端构建信息；变化对比不可用。
+353	Open a player report before copying its public statistics.	请先打开玩家报告，再复制其公开统计。
+354	Open a player report with a saved observation first.	请先打开带有已保存观测的玩家报告。
+355	Open the inspected player's statistics. Optional automatic opening is in More or /ggs auto on.	打开被检视玩家的统计。可选的自动打开在「更多」中，或使用 /ggs auto on。
+356	Open this observation	打开此观测
+357	Open with Inspect	随检视打开
+358	Open with Inspect: %s	随检视打开：%s
+359	Open your own statistics report.	打开你自己的统计报告。
+360	Ordinary	正常
+361	Origin	来源
+362	Other (not itemized)	其他（未分项）
+363	Other players	其他玩家
+364	Paid to them	付给对方的
+365	Partial: %s; coverage confidence lowered by %d points.	部分：%s；覆盖率置信度降低 %d 点。
+366	Pastimes and supplies	消遣与消耗品
+367	Paused for Achievements	已为成就界面暂停
+368	Peak	峰值
+369	Peak %s is ordinary for level %d	峰值 %s 对 %d 级而言属正常
+370	Peak (display only)	峰值（仅展示）
+371	Peak / Income / Gap	峰值 / 收入 / 缺口
+372	Peak above total acquired	峰值高于累计获得
+373	Peak above total acquired: %s (separate from source-sum gap)	峰值高于累计获得：%s（与来源合计缺口分开计算）
+374	Peak gold	峰值金币
+375	Peak gold is unavailable.	峰值金币不可用。
+376	Peak gold: %s	峰值金币：%s
+377	Peak is %.1fx the median of %d local players within 5 levels (%s)	峰值是中位数的 %.1f 倍（%d 名 5 级以内的本地玩家，%s）
+378	Peak is historical, not current gold. A dash means the game gave no value; it is unknown, not zero. Hover any line for its source. Mail, gifts and transfers can explain a gap.	峰值是历史值，不是当前金币。短横线表示游戏未给出数值；它是未知，不是零。悬停任意一行可查看其来源。邮件、赠予和角色间转移可以解释缺口。
+379	Peak is historical, not current wealth. Income is not profit. Transfers and resets can affect gaps.	峰值是历史值，不是当前财富。收入不是利润。转移与重置会影响缺口。
+380	Peak mean %s; median %s (n=%d)\nIncome mean %s (n=%d); %d players.	峰值均值 %s；中位数 %s（n=%d）\n收入均值 %s（n=%d）；%d 名玩家。
+381	Peak range: %s to %s. %d of %d readable gold rows; %d fresh. All scans and level averages describe your full local catalogue; search filters the player list below. Fresh means within the configured cache age. Readable means all five values parsed, not complete auction coverage. Public income and recorded gaps may be incomplete.	峰值区间：%s 至 %s。%d / %d 行为可读金币数据；%d 条新近。全部扫描与等级均值描述你的整个本地目录；搜索只筛选下方的玩家列表。新近指在设定的缓存时限内。可读指五个数值全部解析成功，不代表拍卖覆盖完整。公开收入与已记录缺口可能不完整。
+382	Player	玩家
+383	Player averages	玩家平均值
+384	Player is no longer available.	该玩家已不可用。
+385	Player is no longer available. Saved results remain visible.	该玩家已不可用。已保存的结果仍然可见。
+386	Player report	玩家报告
+387	Player: %s	玩家：%s
+388	Players	玩家
+389	Postage	邮资
+390	Postings include repeated and unsuccessful listings. This is not gold per sale; zero counts have no average.	上架包含重复和未成功的挂单。这不是每笔成交的金币；零计数没有平均值。
+391	Potions used	使用的药水
+392	Private invoice totals and your firsthand log are excluded. Nothing is sent automatically.	私人发票总额与你的第一手日志不纳入计算。不会自动发送任何内容。
+393	Professions	专业
+394	Professions at maximum skill	技能满级的专业
+395	Professions learned	学会的专业
+396	Public auction counters are incomplete on this client. Recorded gaps can overstate missing income.	本客户端上公开拍卖计数器不完整。已记录缺口可能高估缺失的收入。
+397	Public game counters; wallet included only for self captures. Auction coverage is incomplete. Missing values are not zero.	公开游戏计数器；钱包仅在自身捕获时计入。拍卖覆盖不完整。缺失值不是零。
+398	Public income: %s	公开收入：%s
+399	Public income: %s (partial)	公开收入：%s（部分）
+400	Public source	公开来源
+401	PvP	PvP
+402	Quest rewards	任务奖励
+403	Questing	任务
+404	Quests	任务
+405	Quests abandoned	放弃任务
+406	Quests completed	完成任务
+407	Quests per day (game average)	平均每日任务数（游戏平均）
+408	Raid and dungeon deaths	地下城和团队副本死亡
+409	Readable game counter; coverage may be incomplete	可读的游戏计数器；覆盖可能不完整
+410	Ready	就绪
+411	Realm: %s	服务器：%s
+412	Received from them	从对方收到
+413	Recent observations (newest first)	最近观测（最新在前）
+414	Recorded	已记录
+415	Recorded activity	已记录活动
+416	Recorded gap	已记录缺口
+417	Recorded gap: %s	已记录缺口：%s
+418	Recorded gap: %s (partial)	已记录缺口：%s（部分）
+419	Recorded income	已记录收入
+420	Recorded income counted: %s	已计入的已记录收入：%s
+421	Recorded income counts only what the game itemizes. Mail, trades and gifts are never itemized, so a rise they explain still shows here. Unexplained is not proof of RMT or of any rule breaking.	已记录收入只计游戏分项列出的部分。邮件、交易和赠予从不分项列出，因此由它们解释的上涨仍会显示在这里。无法解释不等于 RMT 或任何违规的证据。
+422	Recorded income covers %d%% of observed wealth (%s of %s%s)	已记录收入覆盖观测财富的 %d%%（%s / %s%s）
+423	Recorded spending: %s (%d/%d counters)	已记录支出：%s（%d / %d 项计数器）
+424	Remove the player-list filter. All-player statistics and saved records stay unchanged.	移除玩家列表筛选。全体玩家统计与已保存记录保持不变。
+425	Repairs	修理
+426	Report	报告
+427	Report tools and preferences	报告工具与偏好设置
+428	Reputation	声望
+429	Request queued	请求已排队
+430	Rescan this player	重新扫描此玩家
+431	Reset positions	重置位置
+432	Retain all characters	保留全部角色
+433	Retained observations and how each counter changed between them.	留存观测，以及各项计数器在观测之间的变化。
+434	Returned deposits	退还的保证金
+435	Review every retained counter at its original time. Browsing sends no request.	按原始时间查看每项留存计数器。浏览不会发出任何请求。
+436	Right-click: Tooltip scanning %s	右键：提示框扫描 %s
+437	Rises in peak gold between saved observations that itemized income does not cover (at least %s and half the rise). Mail, trades and gifts produce the same pattern.	已保存观测之间峰值金币的上涨中，已分项收入无法覆盖的部分（至少 %s，且达到涨幅的一半）。邮件、交易与赠予会产生相同的形态。
+438	No API	无接口
+439	Read failed	读取失败
+440	Unknown format	未知格式
+441	Restricted	受限
+442	Hidden	已隐藏
+443	Unavailable	不可用
+444	Not reported	未上报
+445	Not on client	本客户端没有
+446	Sale invoice failed validation	成交发票未通过校验
+447	Sale total exceeds safe range	成交总额超出安全范围
+448	Sale-mail amounts	成交邮件金额
+449	Same-build observation changes, not transactions or profit.	同构建观测之间的变化，不是交易或利润。
+450	Save shown observation	保存当前显示的观测
+451	Saved game counter; original field status unavailable	已保存的游戏计数器；原始字段状态不可用
+452	Saved-player dashboard. 	已保存玩家面板。
+453	Scan age	扫描时间
+454	Scan history	扫描历史
+455	Scan history  |  %s recorded	扫描历史  |  已记录 %s
+456	Scan unavailable. Hover the player again to retry.	扫描不可用。再次悬停该玩家以重试。
+457	Scan unavailable. Keep the player nearby and try again.	扫描不可用。让该玩家留在附近并重试。
+458	Scanned	已扫描
+459	Scanning...	扫描中…
+460	Scanning... %ss; keep this player nearby.	扫描中… %s 秒；请让该玩家留在附近。
+461	Scans	扫描次数
+462	Score %s / 100	评分 %s / 100
+463	Score: the weighted average of the factors that had data (income coverage, unexplained rises, wealth for level, activity and your dealings).\n	评分：有数据的因子的加权平均（收入覆盖率、无法解释的上涨、等级财富、活动度与你和他的往来）。\n
+464	Search players, class, guild or verdict	搜索玩家、职业、公会或判定
+465	Search saved players	搜索已保存玩家
+466	Search statistics	搜索统计
+467	Section	区块
+468	Select a nearby player, then click to open their gold report. Requests use the existing identity checks and cooldowns.	选择一个附近玩家，然后点击打开他的金币报告。请求沿用现有的身份检查与冷却。
+469	Select all	全选
+470	Select all, then Ctrl+C. Includes identity and, for self captures, your wallet.	全选后按 Ctrl+C。包含身份信息，自身捕获还包含你的钱包。
+471	Self captures only.	仅限自身捕获。
+472	Self-only: money that moved between you and this player while your firsthand log was on. Stored for this character only; never sent.	仅限自身：第一手日志开启期间你与此玩家之间流动的金币。仅为本角色保存；绝不发送。
+473	Session only: newer saved format	仅本次会话：较新的保存格式
+474	Seven activity areas, gameplay, PvP, pastimes, collections and professions.	七个活动区域，以及玩法、PvP、消遣、收藏和专业。
+475	Share of peak	占峰值比例
+476	Since previous scan	自上次扫描以来
+477	Size of every Grimlight window, 60% to 160%. Windows still shrink to fit the screen. /ggs scale reset restores the 100% default.	每个 Grimlight 窗口的尺寸，60% 至 160%。窗口仍会缩小以适应屏幕。/ggs scale reset 恢复 100% 默认值。
+478	Skills	技能
+479	Skinning	剥皮
+480	Smaller	较小
+481	Sort saved players	排序已保存玩家
+482	Sort: %s	排序：%s
+483	Spending	支出
+484	Statistic %d in %s.	统计量 %d，位于 %s。
+485	Statistic not available on this client	本客户端没有此统计量
+486	Statistics	统计
+487	Statistics API unavailable	统计接口不可用
+488	Statistics list unavailable	统计列表不可用
+489	Status unavailable; the report below is still current.	状态不可用；下方报告仍为最新。
+490	Storage	存储
+491	Summary	摘要
+492	Summons accepted	接受召唤
+493	Activity	活动
+494	History	历史
+495	Origin	来源
+496	Players	玩家
+497	Report	报告
+498	Statistics	统计
+499	Peak %s	峰值 %s
+500	Tailoring	裁缝
+501	Talent changes	修改天赋花费
+502	Talent respecs	重新分配天赋
+503	Target	目标
+504	Target report	目标报告
+505	The catalogue opens when combat ends.	战斗结束后打开目录。
+506	The client has not listed its statistics yet. Open the Achievements window once, then /reload, or try again in a moment.	客户端尚未列出其统计列表。打开一次成就窗口，然后 /reload，或稍后重试。
+507	The game marked this counter as hidden or skipped	游戏将此计数器标记为隐藏或跳过
+508	The game's own average, not a locally measured earning rate. Its time basis and completeness are controlled by the game.	游戏自带的平均值，不是本地测得的赚取速率。其时间基准与完整性由游戏掌控。
+509	The gold report opens when combat ends.	战斗结束后打开金币报告。
+510	The inspected player changed. Inspect that player again.	被检视的玩家已变更。请重新检视该玩家。
+511	The new look applies when combat ends.	新外观将在战斗结束后生效。
+512	The player must still be available nearby. Scans share the normal request cooldown.	玩家必须仍在附近可用。扫描共用常规的请求冷却。
+513	The short check in unit tooltips. It needs all five gold counters, including auctions, so a partial record shows Too little data there.	单位提示框里的简要检查。它需要全部五个金币计数器，包括拍卖，因此记录不完整时那里会显示「数据太少」。
+514	The statistics API could not read this counter; try Rescan	统计接口无法读取此计数器；请重新扫描
+515	They sent you %s, more than their itemized income %s	对方发给你 %s，超过其已分项收入 %s
+516	This observation is already retained. Rescan obtains a new observation.	此观测已经留存。重新扫描可获得新的观测。
+517	This observation keeps only the counters Grimlight's checks use. Rescan the player (or open your own report) to read every public statistic.	此观测只保留 Grimlight 检查所需的计数器。重新扫描该玩家（或打开你自己的报告）可读取全部公开统计。
+518	This report couldn't be copied. The window itself is unaffected.	无法复制此报告。窗口本身不受影响。
+519	This section couldn't load.	此区块无法加载。
+520	Too far	距离太远
+521	Too few peers	同级玩家太少
+522	Tooltip check	提示框检查
+523	Top reason: %s	首要原因：%s
+524	Top reason: no saved statistics yet	首要原因：尚无已保存的统计
+525	Top reasons	主要原因
+526	Total acquired	累计获得
+527	Total acquired minus the itemized counters: mail, trades, refunds and anything else the game does not list.	累计获得减去已分项的计数器：邮件、交易、退款，以及游戏未列出的其他一切。
+528	Total kills	击败总数
+529	Total-acquired comparison	累计获得对比
+530	Trade	交易
+531	Travel	旅行
+532	Turn on the firsthand log (More) to record your own mail and trade money.	开启第一手日志（更多）以记录你自己的邮件与交易金币。
+533	Unavailable	不可用
+534	Unexplained is not proof of RMT	无法解释不等于 RMT 的证据
+535	Unexplained rise %s	无法解释的上涨 %s
+536	Unexplained rises	无法解释的上涨
+537	Unexplained rises: needs two comparable saved observations	无法解释的上涨：需要两次可比较的已保存观测
+538	Unknown	未知
+539	Unknown date	日期未知
+540	Unknown dates	日期未知
+541	Unknown time	时间未知
+542	Unsupported number format	不支持的数字格式
+543	Up	上升
+544	Use /ggs retain all or bounded.	使用 /ggs retain all 或 bounded。
+545	Uses the game's gross total, separate from the source-sum summary above. Neither measure is a complete income ledger or profit. Transfers and missing counters can affect both.	采用游戏自带的毛计总额，与上方来源合计摘要分开。两者都不是完整的收入流水或利润。角色间转移与缺失的计数器会同时影响两者。
+546	Bank-shaped	仓库号形态
+547	Explained	收入可解释
+548	Too far	距离太远
+549	Empty history, large peak	历史为空、峰值很高
+550	Unexplained peak	无法解释的峰值
+551	Identity hidden	身份已隐藏
+552	Scanning...	扫描中…
+553	Too little data	数据太少
+554	Value unavailable or restricted	数值不可用或受限
+555	Vanity pets owned	拥有的小宠物
+556	Vendor sales	卖店收入
+557	Verdict	判定
+558	Verdict, score and confidence, the gold tiles, income coverage and top reasons.	判定、评分与置信度、金币图块、收入覆盖率与主要原因。
+559	Wallet at scan	扫描时钱包
+560	Wallet now: %s	当前钱包：%s
+561	Wallet: other players' wallets are unavailable	钱包：其他玩家的钱包不可用
+562	Wealth for level	等级财富
+563	Wealth for level: fewer than %d saved players within 5 levels	等级财富：5 级以内的已保存玩家少于 %d 名
+564	When on, inspecting a player also opens their gold report beside the Inspect window and closes it with Inspect. The Gold report button under Inspect works either way.	开启后，检视玩家时会在检视窗口旁一并打开其金币报告，并随检视窗口关闭。检视窗口下方的金币报告按钮在两种情况下都可用。
+565	Where recorded income comes from, with confidence, and unexplained rises.	已记录收入来自何处，附置信度，以及无法解释的上涨。
+566	Window look	窗口外观
+567	Window look: %s (applies when combat ends).	窗口外观：%s（战斗结束后生效）。
+568	Window look: %s.	窗口外观：%s。
+569	Window look: %s. /ggs skin grimlight or /ggs skin native.	窗口外观：%s。/ggs skin grimlight 或 /ggs skin native。
+570	Window positions reset; history and preferences retained.	窗口位置已重置；历史与偏好设置保留。
+571	Window scale	窗口缩放
+572	Window scale: %.0f%%	窗口缩放：%.0f%%
+573	Windows shrink to fit the screen; /ggs scale reset restores 100%. Inspect itself is never changed.	窗口会缩小以适应屏幕；/ggs scale reset 恢复 100%。检视窗口本身从不改变。
+574	Within 5 levels; latest saved scan each. Observations may be old; this is not a server average.	5 级以内；每人取最近一次保存的扫描。观测可能较旧；这不是服务器平均值。
+575	Your confirmed auction sales	你已确认的拍卖成交
+576	Your dealings	你的往来
+577	Your firsthand log: %d entries%s. Only money seen while the log was on.	你的第一手日志：%d 条记录%s。只包含日志开启期间看到的金币。
+578	Your game statistics	你的游戏统计
+579	Your log: %d dealings, %s received and %s paid	你的日志：%d 笔往来，收到 %s，付出 %s
+580	Your own carried gold when this observation was taken. Rescan captures it again; other players' wallets are unavailable.	本次观测时你随身携带的金币。重新扫描会再次捕获；其他玩家的钱包不可用。
+581	Your saved-player catalogue with search, filters and level averages.	你已保存的玩家目录，含搜索、筛选与等级均值。
+582	Your wallet at capture: %s	捕获时你的钱包：%s
+583	addon/client and request diagnostics	插件/客户端与请求诊断
+584	auction	拍卖
+585	cache cleared.	缓存已清除。
+586	comparison is busy; close Achievements or wait, then try again.	对比通道正被占用；关闭成就界面或稍等，然后重试。
+587	copy the currently open public report	复制当前打开的公开报告
+588	firsthand log of your own trade and mail money	记录你自己交易与邮件金币的第一手日志
+589	forget cached scans	遗忘缓存的扫描
+590	income coverage is unavailable.	收入覆盖率不可用。
+591	last 10 scans	最近 10 次扫描
+592	leave combat, then request statistics again.	离开战斗后再请求统计。
+593	list statistic names, optional filter	列出统计名称，可加筛选
+594	looted coin	拾取金币
+595	minimap button	小地图按钮
+596	native	native
+597	no scans cached.	没有缓存的扫描。
+598	off	关闭
+599	on	开启
+600	only %d%% of the weighted factors have data.	只有 %d%% 的加权因子有数据。
+601	open and save your own report	打开并保存你自己的报告
+602	open or close the catalogue of scanned players	打开或关闭已扫描玩家目录
+603	open the full panel for your target	为目标打开完整面板
+604	open the inspected player report	打开被检视玩家的报告
+605	open with Inspect	随检视打开
+606	quest	任务
+607	report tools and preferences	报告工具与偏好设置
+608	resolved statistic IDs	已解析的统计量 ID
+609	scan your target and print the details	扫描你的目标并打印详情
+610	self: peak %s | explained %s | gap %s (%s). If this looks wrong, do not trust other players yet.	自身：峰值 %s | 可解释 %s | 缺口 %s（%s）。如果这看起来不对，先不要采信其他玩家的数据。
+611	target is not a player.	目标不是玩家。
+612	this client has no achievement comparison API.	本客户端没有成就对比接口。
+613	tooltip scanning	提示框扫描
+614	tooltip scanning %s	提示框扫描 %s
+615	unavailable	不可用
+616	unknown date	日期未知
+617	vendor	卖店
+618	your own statistics (calibration)	你自己的统计（校准）
