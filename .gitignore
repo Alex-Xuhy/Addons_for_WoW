@@ -12,3 +12,6 @@ __pycache__/
 # 打包产物
 dist/
 *.zip
+
+# 装机备份（与官方发布包重复，不入库）
+原作者 Touch/GGS-installed-*/
