@@ -1,0 +1,12 @@
+## Interface: 16001
+## Title: NpcNameplates
+## Notes: 把暴雪只给「友方玩家」的「仅显示名字」同步给 NPC：友方/敌方/中立 NPC 姓名板只显示名字（不显示血条、血量、等级，施法条保留）。颜色按阵营各自可调（默认 亮绿/深红/黄）。可在 设置 → 插件 里调节字号、名字垂直偏移、三色、是否显示名字下方的 <头衔> 行，以及姓名板堆叠、靠近放大两个客户端开关。所有设置只保存在插件自己的存档里；两个客户端开关用临时值覆盖、不写入游戏配置文件，卸载插件后游戏立刻恢复原生。聊天框输入 /nn 或 /nnp 打开设置。玩家姓名板与玩家控制的单位（宠物/图腾等）不受影响。
+## Author: 匿名
+## Version: 0.7.0
+## Category: Interface
+## AllowLoadGameType: camelot
+## DefaultState: enabled
+## SavedVariables: NpcNameplatesDB
+
+NpcNameplates.lua
+Settings.lua

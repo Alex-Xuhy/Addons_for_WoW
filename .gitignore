@@ -12,6 +12,8 @@ __pycache__/
 # 打包产物
 dist/
 *.zip
+# 发布副本（与源文件逐字节重复，由发布脚本生成）
+NpcNameplates - 只显示NPC姓名的姓名板/发布/
 
 # 装机备份（与官方发布包重复，不入库）
 **/GGS-installed-*/
