@@ -52,7 +52,8 @@ end
 
 local function addDouble(tooltip, text, color)
     local from = tooltip:NumLines() + 1
-    tooltip:AddDoubleLine(labelText(), text, 1, 1, 1, color[1], color[2], color[3])
+    local pink = NW.COLORS.pink
+    tooltip:AddDoubleLine(labelText(), text, pink[1], pink[2], pink[3], color[1], color[2], color[3])
     return from
 end
 
@@ -102,9 +103,12 @@ local function compose(row)
     end
     local band = result.band or "gray"
     local label = NW.L(Rate.BandLabelKey(band))
-    local detail = NW.L("TOOLTIP_SAMPLE", row.need, row.greed, row.entries, result.rolls)
+    -- The counter breakdown used to sit on a second line; four labelled
+    -- counters ran wider than the tooltip's own content, so the rate line
+    -- carries the verdict alone. Only the short red-cap note stays.
+    local detail = nil
     if result.redCapped then
-        detail = detail .. " · " .. NW.L("TOOLTIP_RED_CAP")
+        detail = NW.L("TOOLTIP_RED_CAP")
     end
     return NW.L("TOOLTIP_RATE", (result.ratio or 0) * 100, label), detail, Rate.Color(band)
 end

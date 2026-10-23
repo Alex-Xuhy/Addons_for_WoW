@@ -5,9 +5,10 @@
 local ADDON, NW = ...
 
 NW.strings = {
-    TITLE = "NinjaWatcher - 全需党规避器",
+    TITLE = "NinjaWatch - 全需党规避器",
     SUBTITLE = "基于公开成就统计的需求/贪婪掷骰计数，仅供参考。",
     VERSION = "版本 %s",
+    VERSION_BETA = "版本 %s · 测试版",
 
     TAB_PLAYERS = "玩家",
     TAB_OPTIONS = "选项",
@@ -18,13 +19,15 @@ NW.strings = {
     TOOLTIP_INSUFFICIENT = "数据不足",
     TOOLTIP_PASS = "低",
     TOOLTIP_RATE = "需求率 %.1f%% · %s",
-    TOOLTIP_SAMPLE = "需求掷骰次数 %d · 贪婪掷骰次数 %d · 进入地下城次数 %d · 合计掷骰次数 %d",
     TOOLTIP_PASS_DETAIL = "合计掷骰次数 %d < 门槛 %.1f（进入地下城次数 %d）",
     TOOLTIP_THRESHOLD = "门槛 %.1f（进入地下城次数 %d）",
     TOOLTIP_RED_CAP = "合计掷骰次数<30，最高只显示黄档",
     TOOLTIP_INSUFFICIENT_DETAIL = "至少需要进入地下城次数≥%d",
     TOOLTIP_STATUS_FAR = "距离太远",
-    TOOLTIP_STATUS_BUSY = "暂不可扫描",
+    -- BUSY only means another scan is in flight right now; it is not a
+    -- property of the hovered player. Same wording and ellipsis as PENDING so
+    -- both waiting states read as "still fetching".
+    TOOLTIP_STATUS_BUSY = "扫描中…",
     TOOLTIP_STATUS_COMBAT = "战斗中",
     TOOLTIP_STATUS_NOAPI = "客户端不支持成就对比",
     TOOLTIP_STATUS_TIMEOUT = "扫描超时",
@@ -76,17 +79,27 @@ NW.strings = {
     COL_LEVEL = "等级",
     COL_NEED = "需求",
     COL_GREED = "贪婪",
-    COL_ENTRIES = "进入",
+    COL_ENTRIES = "进入地下城",
     COL_ROLLS = "合计",
     COL_RATE = "需求率",
     COL_BAND = "档位",
     COL_TIME = "最后扫描",
-    TABLE_LEGEND = "列含义：需求=需求掷骰次数，贪婪=贪婪掷骰次数，进入=进入地下城次数，合计=需求+贪婪。",
+    TABLE_LEGEND = "列含义：需求=需求掷骰次数，贪婪=贪婪掷骰次数，进入地下城=进入地下城次数，合计=需求+贪婪。",
     TABLE_PASS = "低",
     TABLE_INSUFFICIENT = "数据不足",
     TABLE_UNKNOWN = "未知",
     TABLE_ROW_DETAIL = "需求掷骰次数 %d　贪婪掷骰次数 %d\n进入地下城次数 %d　合计掷骰次数 %d\n需求率：%s\n判定：%s\n最后扫描：%s",
     RATE_HINT = "需求率 = 需求掷骰次数/合计掷骰次数，用以提供需求行为的参考。",
+
+    -- The entry appended to the unit popup (right-click a portrait).
+    MENU_DETAIL = "详细掷骰行为",
+    -- BETA(0.2.0): the tester marks a player as a need-everything ninja.
+    MENU_REPORT = "报告全需玩家",
+    MENU_UNREPORT = "取消报告",
+    CHAT_REPORT_ON = "已报告「%s」为全需玩家，样本已记录。",
+    CHAT_REPORT_QUEUED = "已标记该玩家，扫描完成后自动补记计数。",
+    CHAT_REPORT_OFF = "已取消该玩家的报告标记。",
+    CHAT_REPORT_NO_GUID = "拿不到这名玩家的标识，无法标记。",
 
     OPTIONS_TITLE = "显示与提示",
     OPTIONS_TOOLTIP = "鼠标提示中显示需求率",
@@ -114,7 +127,7 @@ NW.strings = {
     CHAT_HELP_STATUS = "/nw status — 查看自己的计数与判定",
     CHAT_HELP_TEST = "/nw test — 运行内置判定测试",
     CHAT_HELP_CLEAR = "/nw clear — 清除本地记录（需二次确认）",
-    CHAT_CLEAR_ASK = "这会删除全部本地玩家记录。再次输入 /nw clear confirm 确认。",
+    CHAT_CLEAR_ASK = "这会删除全部本地玩家记录与已报告的全需样本。再次输入 /nw clear confirm 确认。",
     CHAT_CLEAR_DONE = "已清除 %d 条本地记录。",
     CHAT_CLEAR_CANCEL = "已取消清除。",
     CHAT_STATUS = "自己：需求掷骰次数=%d，贪婪掷骰次数=%d，进入地下城次数=%d，合计掷骰次数=%d；%s。",
@@ -125,5 +138,8 @@ NW.strings = {
     CHAT_TEST_FAIL = "失败 %d 项",
     CHAT_DEBUG = "扫描状态：%s；队列：%d；本地记录：%d；对比接口：%s。",
     CHAT_NO_SETTINGS = "此客户端没有 Settings 面板接口，无法打开设置页。",
+    CHAT_NO_MENU_API = "此客户端没有 Menu 接口，右键菜单项不可用。",
+    CHAT_NO_MENU_OPEN = "当前没有打开的菜单（右键头像后再查）。",
+    CHAT_MENU_TAGS = "当前打开的菜单标签：%s",
     CHAT_ADDON_LOADED = "已加载。输入 /nw 打开设置。",
 }

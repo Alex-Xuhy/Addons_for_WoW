@@ -31,6 +31,7 @@ local function login()
     safeInit("Tooltip", function() NW.Tooltip.Init() end)
     safeInit("Party", function() NW.Party.Init() end)
     safeInit("Settings", function() NW.Settings.Init() end)
+    safeInit("UnitMenu", function() NW.Settings.InitUnitMenu() end)
 end
 
 eventFrame:RegisterEvent("ADDON_LOADED")
@@ -120,6 +121,20 @@ local function debug()
         info.api and "可用" or "不可用"))
 end
 
+-- Diagnostic for the unit-popup entry: the tags of the menus open right now.
+local function menuTags()
+    if type(Menu) ~= "table" or type(Menu.GetOpenMenuTags) ~= "function" then
+        NW.Print(NW.L("CHAT_NO_MENU_API"))
+        return
+    end
+    local ok, tags = pcall(Menu.GetOpenMenuTags)
+    if not ok or type(tags) ~= "table" or #tags == 0 then
+        NW.Print(NW.L("CHAT_NO_MENU_OPEN"))
+        return
+    end
+    NW.Print(NW.L("CHAT_MENU_TAGS", table.concat(tags, ", ")))
+end
+
 SLASH_NINJAWATCHER1 = "/nw"
 SLASH_NINJAWATCHER2 = "/ninjawatcher"
 SlashCmdList["NINJAWATCHER"] = function(message)
@@ -138,6 +153,8 @@ SlashCmdList["NINJAWATCHER"] = function(message)
         clear(command:match("^clear%s+(.+)$") or "")
     elseif command == "debug" then
         debug()
+    elseif command == "menutags" then
+        menuTags()
     else
         help()
     end

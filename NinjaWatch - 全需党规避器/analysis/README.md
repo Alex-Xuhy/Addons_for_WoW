@@ -7,12 +7,15 @@
 | 路径 | 作用 |
 |---|---|
 | `calibrate_pass_ratio.py` | **主标定脚本**：读 GGS + NinjaWatcher SavedVariables，算 R/E 分位、5.4 的位置、候选 q_lo 的判定结果、低 G / 高 N/R 子集 |
+| `export_reports.py` | **测试版（0.2.0）**：把 `NinjaWatcherDB.reports`（右键「报告全需玩家」留下的样本）导成 CSV + Markdown |
 | `ggs_dist.py` | 旧版分布脚本（`n>=20` 口径）；保留用于回看 Phase 0 数字，当前结论以标定脚本为准 |
 | `map_ids.py` | 读 `external/achievement.csv`，把统计 ID 映射到名称，列出 5 人相关条目 |
 | `calibration/pass_ratio_history.csv` | 每次快照一行；标定脚本自动追加 |
 | `calibration/latest.md` | 最近一次可读报告 |
 | `calibration/latest.json` | 最近一次机器可读结果 |
 | `calibration/latest.lua` | 复核用 Lua 表（插件**不读取**） |
+| `outputs/reported_players.csv` | `export_reports.py` 的产物：一条已报告样本一行 |
+| `outputs/reported_players.md` | 同上，人读版 |
 | `outputs/ggs_dist_report.txt` | `ggs_dist.py` 的旧输出（154 行） |
 | `outputs/id_map.txt` | `map_ids.py` 的输出（148 行） |
 | `external/achievement.csv` | 外部成就/统计表（wago.tools），只读参考 |
@@ -25,13 +28,16 @@ py -I analysis/calibrate_pass_ratio.py            # 新快照才写
 py -I analysis/calibrate_pass_ratio.py --dry-run  # 只打印，不写
 py -I analysis/calibrate_pass_ratio.py --force    # 强制重写
 py -I analysis/calibrate_pass_ratio.py --self-test
+
+py -I analysis/export_reports.py            # 导出测试版已报告样本
+py -I analysis/export_reports.py --dry-run  # 只打印，不写
 ```
 
 - 需要 Python 3；无第三方依赖。
 - 用 `-I` 隔离环境，避免当前目录/用户 site-packages 里的同名模块被误加载。
 - 默认输入路径：
   - `D:/World of Warcraft/_cn_beta_/WTF/Account/*/SavedVariables/GrimlightGoldScanner.lua`
-  - 同目录 `NinjaWatcher.lua`（尚不存在）
+  - 同目录 `NinjaWatcher.lua`
 - 换机器/换客户端目录时用 `--ggs-pattern` / `--nw-pattern` 覆盖，或改脚本顶部常量。
 
 ## `calibrate_pass_ratio.py` 做了什么
@@ -46,6 +52,18 @@ py -I analysis/calibrate_pass_ratio.py --self-test
 8. 算低 G 子集（G/R≤0/10/20/30%）的 N/E 分位；样本不足时明确报 `n=0`。
 9. 算高 N/R 子集（≥50/60/70%）的 N/E、R/E、当前判放弃派人数。
 10. 输出档位分布（灰/深绿/绿/黄/封顶/红）。
+
+## `export_reports.py`（测试版 0.2.0）
+
+插件没有写任意文件的能力，所以「报告全需玩家」只是往本机 SavedVariables 写一行记录；这个脚本把它导出成能看的表。
+
+1. 用同一个 `LuaParser` 解析 `NinjaWatcherDB = {...}`（**不执行 Lua**），取 `reports` 表。
+2. 一条样本一行：样本 ID、标记时间（本地时区）、需求/贪婪/进入地下城/合计、需求率、每趟掷骰、当时判定、当时门槛、计数是否完整。
+3. 样本 ID = GUID 的 SHA-1 前 8 位；**不写角色名、不写完整 GUID、不写账号路径**。
+4. 判定列：`待扫描`（标记时还没扫过）、`数据不足`（`E<4`）、`不可读`、`低（放弃型）`、档位名。
+5. 计数不完整（例如标记时还没扫描）的样本照样保留，`complete=no`，不丢弃。
+
+参数：`--data-dir`、`--out-dir`、`--pattern`、`--dry-run`。前提是游戏已 `/reload` 或退出——SavedVariables 只在这两个时机落盘。
 
 ## 输出与隐私
 

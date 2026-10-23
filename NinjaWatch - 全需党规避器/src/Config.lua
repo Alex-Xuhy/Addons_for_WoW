@@ -34,7 +34,13 @@
 local ADDON, NW = ...
 
 NW.NAME = ADDON
-NW.VERSION = "0.1.1"
+NW.VERSION = "0.2.0"
+
+-- BETA(0.2.0): the addon is still a test build: the band edges have never
+-- seen a real need-everything player, so the portrait menu carries a
+-- "报告全需玩家" entry that stores the tester's own judgement as a reference
+-- sample. Everything behind this flag goes away in 1.0.0.
+NW.BETA = true
 
 NW.STAT = {
     need = 1044,
@@ -74,6 +80,9 @@ NW.COLORS = {
     red = { 1.00, 0.25, 0.25 },
     gray = { 0.62, 0.62, 0.62 },
     white = { 1.00, 1.00, 1.00 },
+    -- The same pink GrimlightGoldScanner uses (#f58cba) for its tooltip
+    -- prefix, so the two addons read alike on the same tooltip.
+    pink = { 245 / 255, 140 / 255, 186 / 255 },
 }
 
 NW.DEFAULTS = {

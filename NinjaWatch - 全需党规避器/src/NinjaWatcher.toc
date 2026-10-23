@@ -1,8 +1,8 @@
 ## Interface: 16001
-## Title: NinjaWatcher - 全需党规避器
+## Title: NinjaWatch - 全需党规避器
 ## Notes: 基于公开成就统计的需求/贪婪掷骰计数，提示队伍中需求率偏高的玩家。仅供参考，不构成决策建议。
 ## Author: 匿名
-## Version: 0.1.1
+## Version: 0.2.0
 ## Category: Interface
 ## SavedVariables: NinjaWatcherDB
 ## AllowLoadGameType: camelot

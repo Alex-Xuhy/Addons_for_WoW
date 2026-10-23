@@ -15,13 +15,14 @@ local COLUMNS = {
     { key = "level", x = 144, width = 32, title = "COL_LEVEL", align = "LEFT" },
     { key = "need", x = 180, width = 36, title = "COL_NEED", align = "RIGHT" },
     { key = "greed", x = 220, width = 36, title = "COL_GREED", align = "RIGHT" },
-    { key = "entries", x = 260, width = 36, title = "COL_ENTRIES", align = "RIGHT" },
-    { key = "rolls", x = 300, width = 36, title = "COL_ROLLS", align = "RIGHT" },
-    { key = "rate", x = 340, width = 58, title = "COL_RATE", align = "RIGHT" },
-    { key = "band", x = 402, width = 58, title = "COL_BAND", align = "LEFT" },
+    -- "进入地下城" needs room for five characters on one line in the header.
+    { key = "entries", x = 260, width = 64, title = "COL_ENTRIES", align = "RIGHT" },
+    { key = "rolls", x = 328, width = 36, title = "COL_ROLLS", align = "RIGHT" },
+    { key = "rate", x = 368, width = 58, title = "COL_RATE", align = "RIGHT" },
+    { key = "band", x = 430, width = 58, title = "COL_BAND", align = "LEFT" },
     -- The timestamp needs a full "MM-DD HH:MM" on one line; a narrow column
     -- wrapped it into two lines that ran over the next row.
-    { key = "time", x = 464, width = 104, title = "COL_TIME", align = "LEFT" },
+    { key = "time", x = 492, width = 104, title = "COL_TIME", align = "LEFT" },
 }
 
 local frame
@@ -38,6 +39,8 @@ local rows = {}
 local checkboxes = {}
 local sortMode = "recent"
 local activePage = "players"
+local highlightGUID = nil
+local tabs = {}
 
 local function safeName(row)
     local name = row.name
@@ -88,6 +91,15 @@ local function makeRow(index)
     highlight:SetAllPoints(row)
     highlight:SetTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight")
     highlight:SetBlendMode("ADD")
+    -- Marks the player the unit-popup entry was opened for, with the same
+    -- glow the row shows while the mouse is over it. ARTWORK keeps it under
+    -- the column text.
+    local band = row:CreateTexture(nil, "ARTWORK")
+    band:SetAllPoints(row)
+    band:SetTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight")
+    band:SetBlendMode("ADD")
+    band:Hide()
+    row.band = band
     row.texts = {}
     for _, column in ipairs(COLUMNS) do
         local text = addColumn(row, column, false)
@@ -131,7 +143,16 @@ local function setRow(index, entry)
     local result = entry.result
     local bandLabel, bandColor = bandText(result)
     row.entry = entry
-    row.texts.name:SetText(safeName(entry.row))
+    local name = safeName(entry.row)
+    -- BETA(0.2.0): a star marks the players the tester reported as ninjas.
+    if DB.Reported(entry.guid) then
+        name = name .. " ★"
+    end
+    row.texts.name:SetText(name)
+    row.texts.name:SetTextColor(1, 1, 1)
+    -- Only the glow marks the row: a gold name sat right under the gold column
+    -- headers and read as part of them, so the name stays plain white.
+    row.band:SetShown(highlightGUID ~= nil and entry.guid == highlightGUID)
     row.texts.level:SetText(entry.row.level and tostring(entry.row.level) or "–")
     row.texts.need:SetText(tostring(entry.row.need))
     row.texts.greed:SetText(tostring(entry.row.greed))
@@ -183,6 +204,14 @@ function Settings.RefreshPlayers()
         rows[i].entry = nil
     end
     scrollChild:SetHeight(math.max(1, #items * ROW_HEIGHT))
+    if highlightGUID and scroll then
+        for i, entry in ipairs(items) do
+            if entry.guid == highlightGUID then
+                scroll:SetVerticalScroll(math.max(0, (i - 1) * ROW_HEIGHT))
+                break
+            end
+        end
+    end
     countText:SetText(NW.L("SETTINGS_COUNT", #items))
     emptyText:SetShown(#items == 0)
     if clearArmed then
@@ -191,10 +220,19 @@ function Settings.RefreshPlayers()
     end
 end
 
+-- A dimmed tab reads as "not finished", so both tabs stay fully lit and the
+-- current one is marked with a gold underline instead.
+local function updateTabs()
+    for page, tab in pairs(tabs) do
+        tab.marker:SetShown(page == activePage)
+    end
+end
+
 local function setPage(page)
     activePage = page
     playersPage:SetShown(page == "players")
     optionsPage:SetShown(page == "options")
+    updateTabs()
     if page == "players" then
         Settings.RefreshPlayers()
     end
@@ -205,6 +243,13 @@ local function makeTab(parent, labelKey, page, x)
     button:SetSize(100, 24)
     button:SetPoint("TOPLEFT", parent, "TOPLEFT", x, -52)
     button:SetText(NW.L(labelKey))
+    local marker = button:CreateTexture(nil, "OVERLAY")
+    marker:SetColorTexture(1, 0.82, 0, 1)
+    marker:SetPoint("TOPLEFT", button, "BOTTOMLEFT", 6, -2)
+    marker:SetPoint("TOPRIGHT", button, "BOTTOMRIGHT", -6, -2)
+    marker:SetHeight(2)
+    button.marker = marker
+    tabs[page] = button
     button:SetScript("OnClick", function() setPage(page) end)
     return button
 end
@@ -260,6 +305,65 @@ function Settings.Open()
     end)
     if not ok then
         pcall(api.OpenToCategory, Settings.category.ID)
+    end
+end
+
+-- Entry point of the unit-popup button: open the catalog and mark the player
+-- the menu was opened on, so the row is easy to find in a long list.
+function Settings.ShowPlayers(guid)
+    highlightGUID = type(guid) == "string" and guid or nil
+    Settings.Open()
+    if playersPage and activePage ~= "players" then
+        setPage("players")
+    elseif playersPage then
+        Settings.RefreshPlayers()
+    end
+end
+
+-- ------------------------------------------------------------------ BETA(0.2.0)
+-- The tester marks a player as a need-everything ninja from the portrait menu.
+-- The snapshot is taken at the click, not at export, so a later rule change
+-- cannot silently rewrite what this sample was judged against.
+local function reportSnapshot(row)
+    local result = row and Rate.Evaluate(row) or nil
+    return {
+        at = time(),
+        need = row and row.need or nil,
+        greed = row and row.greed or nil,
+        entries = row and row.entries or nil,
+        rolls = result and result.rolls or nil,
+        ratio = result and result.ratio or nil,
+        band = result and result.band or nil,
+        branch = result and result.branch or nil,
+        status = result and result.status or nil,
+        threshold = result and result.threshold or nil,
+    }
+end
+
+function Settings.ToggleReport(guid, unit)
+    if type(guid) ~= "string" or guid == "" then
+        NW.Print(NW.L("CHAT_REPORT_NO_GUID"))
+        return
+    end
+    if DB.Reported(guid) then
+        DB.ClearReport(guid)
+        NW.Print(NW.L("CHAT_REPORT_OFF"))
+    else
+        local row = DB.GetPlayer(guid)
+        DB.SetReport(guid, reportSnapshot(row))
+        if row then
+            NW.Print(NW.L("CHAT_REPORT_ON", safeName(row)))
+        else
+            -- Marked before any scan landed: ask for one so the counters can be
+            -- filled in, and say so rather than claim a sample is complete.
+            NW.Print(NW.L("CHAT_REPORT_QUEUED"))
+            if type(unit) == "string" and Scan and type(Scan.Request) == "function" then
+                pcall(Scan.Request, unit, { force = true, priority = false, queue = true })
+            end
+        end
+    end
+    if frame and frame:IsShown() and activePage == "players" then
+        Settings.RefreshPlayers()
     end
 end
 
@@ -326,7 +430,7 @@ local function buildPlayersPage(parent)
     -- The header needs its own row so it clips above the scroll frame.
     local header = CreateFrame("Frame", nil, page)
     header:SetPoint("TOPLEFT", page, "TOPLEFT", 4, -80)
-    header:SetSize(570, 18)
+    header:SetSize(600, 18)
     for _, column in ipairs(COLUMNS) do
         addColumn(header, column, true)
     end
@@ -335,7 +439,7 @@ local function buildPlayersPage(parent)
     scroll:SetPoint("TOPLEFT", page, "TOPLEFT", 4, -102)
     scroll:SetPoint("BOTTOMRIGHT", page, "BOTTOMRIGHT", -30, 28)
     scrollChild = CreateFrame("Frame", nil, scroll)
-    scrollChild:SetSize(570, 1)
+    scrollChild:SetSize(600, 1)
     scroll:SetScrollChild(scrollChild)
 
     emptyText = page:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
@@ -382,12 +486,15 @@ local function buildOptionsPage(parent)
     ruleText:SetSpacing(3)
     ruleText:SetText(NW.L("OPTIONS_RULE_TEXT"))
 
+    -- Anchor under the rule block instead of at a fixed offset: the rule text
+    -- wraps to a height that changes with the locale, and a fixed offset ran
+    -- the "隐私" heading into its last line.
     local privacyTitle = page:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    privacyTitle:SetPoint("TOPLEFT", page, "TOPLEFT", 8, -330)
+    privacyTitle:SetPoint("TOPLEFT", ruleText, "BOTTOMLEFT", 0, -14)
     privacyTitle:SetText(NW.L("OPTIONS_PRIVACY_TITLE"))
 
     local privacyText = page:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
-    privacyText:SetPoint("TOPLEFT", page, "TOPLEFT", 8, -354)
+    privacyText:SetPoint("TOPLEFT", privacyTitle, "BOTTOMLEFT", 0, -6)
     privacyText:SetWidth(560)
     privacyText:SetJustifyH("LEFT")
     privacyText:SetSpacing(3)
@@ -429,13 +536,32 @@ function Settings.Init()
         Settings.Refresh()
     end)
 
+    -- Keep an open catalog current: a scan that finishes while the page is up
+    -- (the unit-popup entry queues one) should fill in its row.
+    if Scan and type(Scan.OnReady) == "function" then
+        Scan.OnReady(function(guid, row, status)
+            -- BETA(0.2.0): a mark made before the first scan gets its counters
+            -- here, keeping the original mark time.
+            if status == "READY" and guid and row and DB.Reported(guid) then
+                DB.FillReport(guid, reportSnapshot(row))
+            end
+            if status == "READY" and frame and frame:IsShown() and activePage == "players" then
+                Settings.RefreshPlayers()
+            end
+        end)
+    end
+
     local title = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
     title:SetPoint("TOPLEFT", frame, "TOPLEFT", 8, -8)
     title:SetText(NW.L("TITLE"))
 
     local version = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
     version:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -8, -10)
-    version:SetText(NW.L("VERSION", NW.VERSION))
+    if NW.BETA then
+        version:SetText(NW.L("VERSION_BETA", NW.VERSION))
+    else
+        version:SetText(NW.L("VERSION", NW.VERSION))
+    end
 
     local subtitle = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
     subtitle:SetPoint("TOPLEFT", frame, "TOPLEFT", 8, -30)
@@ -443,20 +569,8 @@ function Settings.Init()
     subtitle:SetJustifyH("LEFT")
     subtitle:SetText(NW.L("SUBTITLE"))
 
-    local tabPlayers = makeTab(frame, "TAB_PLAYERS", "players", 8)
-    local tabOptions = makeTab(frame, "TAB_OPTIONS", "options", 112)
-    tabPlayers:SetScript("OnClick", function()
-        setPage("players")
-        tabPlayers:SetAlpha(1)
-        tabOptions:SetAlpha(0.6)
-    end)
-    tabOptions:SetScript("OnClick", function()
-        setPage("options")
-        tabPlayers:SetAlpha(0.6)
-        tabOptions:SetAlpha(1)
-    end)
-    tabPlayers:SetAlpha(1)
-    tabOptions:SetAlpha(0.6)
+    makeTab(frame, "TAB_PLAYERS", "players", 8)
+    makeTab(frame, "TAB_OPTIONS", "options", 112)
 
     local content = CreateFrame("Frame", nil, frame)
     content:SetPoint("TOPLEFT", frame, "TOPLEFT", 8, -84)
@@ -469,4 +583,67 @@ function Settings.Init()
     local category = api.RegisterCanvasLayoutCategory(frame, NW.L("TITLE"))
     api.RegisterAddOnCategory(category)
     Settings.category = category
+end
+
+-- Right-clicking a portrait opens a Menu API context menu whose tag is
+-- "MENU_UNIT_<which>" (UnitPopupShared). Append one entry that jumps to the
+-- player catalog, so the counters do not depend on the tooltip line being
+-- visible. Older clients without the Menu API simply get no entry.
+local UNIT_MENU_TAGS = {
+    "MENU_UNIT_PLAYER",
+    "MENU_UNIT_SELF",
+    "MENU_UNIT_PARTY",
+    "MENU_UNIT_RAID_PLAYER",
+    "MENU_UNIT_RAID",
+    "MENU_UNIT_TARGET",
+    "MENU_UNIT_FOCUS",
+    "MENU_UNIT_RECENT_ALLY",
+}
+
+local unitMenuInstalled = false
+
+function Settings.InitUnitMenu()
+    if unitMenuInstalled then return end
+    unitMenuInstalled = true
+    if type(Menu) ~= "table" or type(Menu.ModifyMenu) ~= "function" then return end
+    -- A description can carry more than one tag callback; add the entry once.
+    local added = setmetatable({}, { __mode = "k" })
+    for _, tag in ipairs(UNIT_MENU_TAGS) do
+        pcall(Menu.ModifyMenu, tag, function(_, description, contextData)
+            if type(description) ~= "table"
+                or type(description.CreateButton) ~= "function" then
+                return
+            end
+            if added[description] then return end
+            added[description] = true
+            local unit = type(contextData) == "table" and contextData.unit or nil
+            if NW.IsSecret(unit) or type(unit) ~= "string" then unit = nil end
+            local guid
+            if unit and type(UnitGUID) == "function" then
+                local ok, value = pcall(UnitGUID, unit)
+                if ok and not NW.IsSecret(value) and type(value) == "string" then
+                    guid = value
+                end
+            end
+            if type(description.CreateDivider) == "function" then
+                description:CreateDivider()
+            end
+            description:CreateButton(NW.L("MENU_DETAIL"), function()
+                Settings.ShowPlayers(guid)
+                -- Never hovered means no record yet: ask for a scan so the
+                -- page has a row to mark.
+                if unit and Scan and type(Scan.Request) == "function" then
+                    pcall(Scan.Request, unit, { force = true, priority = false, queue = true })
+                end
+            end)
+            -- BETA(0.2.0): one click records the tester's own verdict. The
+            -- label flips to 取消报告 for a player already marked.
+            if guid then
+                local reported = DB.Reported(guid) ~= nil
+                description:CreateButton(
+                    NW.L(reported and "MENU_UNREPORT" or "MENU_REPORT"),
+                    function() Settings.ToggleReport(guid, unit) end)
+            end
+        end)
+    end
 end

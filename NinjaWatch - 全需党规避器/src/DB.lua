@@ -5,6 +5,7 @@
 --   version  = schema version
 --   options  = user settings
 --   players  = { [guid] = row }
+--   reports  = { [guid] = sample }   BETA(0.2.0), see below
 --
 -- A row is the latest observation of one player:
 --   name, realm, level, class, classKey
@@ -52,6 +53,10 @@ local function normalise()
     copy_option_defaults(db.options)
     if type(db.players) ~= "table" then
         db.players = {}
+    end
+    -- BETA(0.2.0): the tester's own "this one is a ninja" marks.
+    if type(db.reports) ~= "table" then
+        db.reports = {}
     end
     return db
 end
@@ -146,6 +151,8 @@ function DB.Clear()
     local count = 0
     for _ in pairs(db.players) do count = count + 1 end
     db.players = {}
+    -- BETA(0.2.0): "clear all records" clears the reported samples too.
+    db.reports = {}
     return count
 end
 
@@ -175,4 +182,75 @@ function DB.ResetOptions()
     local db = normalise()
     db.options = {}
     copy_option_defaults(db.options)
+end
+
+-- ---------------------------------------------------------------- BETA(0.2.0)
+-- The tester marks a player from the portrait menu. A mark is a judgement, not
+-- a scan result, so it carries a frozen snapshot: the counters and the rule's
+-- verdict as they stood at that moment. A later rule change must not rewrite
+-- what an old sample was judged against. No name is stored here.
+local REPORT_NUMBERS = { "need", "greed", "entries", "rolls", "ratio", "threshold" }
+
+function DB.Reported(guid)
+    if type(guid) ~= "string" or guid == "" then return nil end
+    local report = normalise().reports[guid]
+    if type(report) ~= "table" then return nil end
+    return report
+end
+
+function DB.SetReport(guid, snapshot)
+    if type(guid) ~= "string" or guid == "" then return nil end
+    snapshot = type(snapshot) == "table" and snapshot or {}
+    local report = {
+        at = is_number(snapshot.at) and snapshot.at or time(),
+        status = safe_text(snapshot.status, 20),
+        branch = safe_text(snapshot.branch, 20),
+        band = safe_text(snapshot.band, 20),
+    }
+    for _, key in ipairs(REPORT_NUMBERS) do
+        if is_number(snapshot[key]) then report[key] = snapshot[key] end
+    end
+    normalise().reports[guid] = report
+    return report
+end
+
+-- A mark made before the player was ever scanned has no counters yet; fill
+-- them in when a scan lands, keeping the original mark time.
+function DB.FillReport(guid, snapshot)
+    local report = DB.Reported(guid)
+    if not report or is_number(report.rolls) then return report end
+    if type(snapshot) ~= "table" then return report end
+    for _, key in ipairs(REPORT_NUMBERS) do
+        if is_number(snapshot[key]) then report[key] = snapshot[key] end
+    end
+    local status = safe_text(snapshot.status, 20)
+    if status then report.status = status end
+    local branch = safe_text(snapshot.branch, 20)
+    if branch then report.branch = branch end
+    local band = safe_text(snapshot.band, 20)
+    if band then report.band = band end
+    return report
+end
+
+function DB.ClearReport(guid)
+    local db = normalise()
+    if type(guid) == "string" and db.reports[guid] ~= nil then
+        db.reports[guid] = nil
+        return true
+    end
+    return false
+end
+
+-- Reported samples, newest mark first.
+function DB.ReportList()
+    local list = {}
+    for guid, report in pairs(normalise().reports) do
+        if type(guid) == "string" and type(report) == "table" then
+            list[#list + 1] = { guid = guid, report = report }
+        end
+    end
+    table.sort(list, function(a, b)
+        return (tonumber(a.report.at) or 0) > (tonumber(b.report.at) or 0)
+    end)
+    return list
 end

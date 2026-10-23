@@ -1,6 +1,6 @@
 # 源码目录
 
-这里已经是可安装的插件源码（v0.1.0）。静态检查通过；**尚未在游戏内实测**（游戏离线），装进客户端前先看最后一节。
+这里已经是可安装的插件源码（v0.2.0，测试版）。静态检查通过，并已在国服 1.60.1（camelot）游戏内实测。
 
 ## 文件
 
@@ -9,13 +9,13 @@
 | `NinjaWatcher.toc` | 清单：`Interface: 16001`、`AllowLoadGameType: camelot`、`SavedVariables: NinjaWatcherDB`、文件顺序 |
 | `Config.lua` | 统计 ID、`NW.RULE`（q_lo/gap/灰线/档位）、扫描参数、颜色、默认选项、`NW.L` 兜底 |
 | `Locale_zhCN.lua` | 中文文案；键名稳定，可另加 `Locale_enUS.lua` |
-| `DB.lua` | `NinjaWatcherDB.players[guid]` 的 upsert/查询/清除/迁移；只本地 |
+| `DB.lua` | `NinjaWatcherDB.players[guid]` 的 upsert/查询/清除/迁移；另存测试版的 `reports[guid]`（报告样本）；只本地 |
 | `Stats.lua` | 读 `1044`/`1043`/`932`；`GetStatistic` 与 `GetComparisonStatistic`；secret/nil 过滤；单位身份 |
 | `Rate.lua` | 纯函数分类器：放弃型门槛、需求率档位、`/nw test` 的 14 个边界用例 |
 | `Scan.lua` | 成就对比单请求队列、1.5s 间隔、悬停 2.5s / 手动 15s 超时、缓存、原生对比窗静音 |
 | `Tooltip.lua` | `TooltipDataProcessor` 后置回调（回退 `OnTooltipSetUnit` / `UPDATE_MOUSEOVER_UNIT`）；一行本地提示 |
 | `Party.lua` | 5 人队监测、新成员扫描、黄档本地提示、红档可选 `/p`、冷却去重 |
-| `Settings.lua` | `设置 → 插件` 注册；两页：玩家目录 + 显示与提示 |
+| `Settings.lua` | `设置 → 插件` 注册；两页：玩家目录 + 显示与提示；也给右键头像的菜单（Menu API 的 `MENU_UNIT_*` 标签）追加「详细掷骰行为」与测试版的「报告全需玩家」 |
 | `Core.lua` | 初始化、`/nw` 命令、状态/自测/清除 |
 
 文件顺序：`Config` → `Locale_zhCN` → `DB` → `Stats` → `Rate` → `Scan` → `Tooltip` → `Party` → `Settings` → `Core`。
@@ -68,7 +68,8 @@ R ≥ T(E)               → 进入第二步
 ## 数据与隐私
 
 - `NinjaWatcherDB` 只写本机 SavedVariables；不上传、不发邮件、不交易。
-- 设置页“清除全部记录”两次点击确认；`/nw clear confirm` 同样。
+- 测试版的报告样本存在 `NinjaWatcherDB.reports`，同样只在本机；不含名字，导出时用 GUID 的 SHA-1 前 8 位当样本 ID。
+- 设置页“清除全部记录”两次点击确认，会连报告样本一起清空；`/nw clear confirm` 同样。
 - 发布截图打码；不泄露角色名/GUID/服务器。
 - GGS 为 All Rights Reserved：本项目只使用公开统计 ID 与 API 事实，未复制其代码。
 
@@ -81,7 +82,9 @@ R ≥ T(E)               → 进入第二步
    - `/nw test`：14 个边界用例，应全部通过。
    - `/nw status`：看自己的 N/G/E/R 与判定。
    - `/nw`：打开设置页。
-   - 鼠标指向队友/自己：看提示行。
+   - 鼠标指向队友/自己：看提示行（前缀为粉色）。
+   - 右键头像（自己/队友/目标）：菜单里应有「详细掷骰行为」；点击进入「玩家」页后，该玩家所在行应有与悬停同款的金色高光（名字保持白色）。
+   - 测试版：同一菜单里还有「报告全需玩家」——点一次标记（聊天框回执，玩家目录名字后出现 `★`，菜单再打开变成「取消报告」）；再点一次取消。标记后 `/reload` 让 SavedVariables 落盘，再跑 `py -I analysis/export_reports.py` 应能导出这条样本。
    - 5 人队：看黄档本地提示；红档需在选项里手动开启 `/p`。
 5. 已知未实测项：原生对比窗静音/恢复、队伍从 4 人到 5 人的补扫、热加载时的命名框冲突（已计划完整重启）。
 
