@@ -10,6 +10,10 @@ from ggs_dist import LuaParser, num
 
 PATTERN = r"D:/World of Warcraft/_cn_beta_/WTF/Account/*/SavedVariables/GrimlightGoldScanner.lua"
 
+# The real character name is never stored in the repo; pass it at run time:
+#   NW_SELF_NAME_HINT=xxx py -I analysis/tmp_self_need_per_entry.py
+NAME_HINT = os.environ.get("NW_SELF_NAME_HINT", "")
+
 
 def get(row, key, sid):
     value = num(row.get(key))
@@ -54,7 +58,7 @@ def main():
             greed = get(row, "greed", 1043)
             entries = get(row, "dungeons", 932)
             name = row.get("name")
-            name_match = isinstance(name, str) and "角色A" in name
+            name_match = bool(NAME_HINT) and isinstance(name, str) and NAME_HINT in name
             print("  self #%d: level=%s  N=%s  G=%s  E=%s  name_match=%s" % (
                 idx + 1, row.get("level"), need, greed, entries, name_match))
             print("    quality: need=%s greed=%s dungeons=%s" % (
