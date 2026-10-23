@@ -14,4 +14,20 @@ dist/
 *.zip
 
 # 装机备份（与官方发布包重复，不入库）
-原作者 Touch/GGS-installed-*/
+**/GGS-installed-*/
+
+# ---- 以下只留在本机，不进公开仓库 ----
+
+# 原作者源码（All Rights Reserved，不得再分发）与历史版本
+Grimlight Gold Scanner - 汉化/GrimlightGoldScanner-v*/
+Grimlight Gold Scanner - 汉化/版本归档/
+Grimlight Gold Scanner - 汉化/作者沟通/原作者 Touch/
+
+# 暴雪版权的手册导出（api.json.gz 与 13 篇手册）
+Grimlight Gold Scanner - 汉化/部署环境/资料/
+
+# 含个人邮箱与 SSH 配置的记录
+Grimlight Gold Scanner - 汉化/部署环境/设置-git同步.md
+
+# 含其他玩家角色名、公会与服务器的调试记录
+Grimlight Gold Scanner - 汉化/作者沟通/游戏内调试.*
