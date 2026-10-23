@@ -1,0 +1,229 @@
+{
+  "generated_at_utc": "2026-10-22T17:03:44Z",
+  "snapshot_id": "3625903f092fb06339c8b8ce1c508578402aefd9",
+  "sources": [
+    {
+      "kind": "ggs",
+      "size": 2046898,
+      "sha1": "0560cf57df06d2504d8201a6172a80058f04576e",
+      "self_excluded": 1,
+      "invalid": 62
+    }
+  ],
+  "parse_errors": [],
+  "counts": {
+    "cache_rows": 170,
+    "records": 107,
+    "unique": 107,
+    "dedup_conflicts": 0,
+    "zero_entries": 0,
+    "zero_rolls": 0,
+    "usable": 107,
+    "gray": 39,
+    "main": 68,
+    "self_excluded": 1,
+    "invalid": 62
+  },
+  "quantiles": {
+    "p05": 2.362851782363977,
+    "p10": 3.1166666666666667,
+    "p15": 3.840686274509804,
+    "p18": 4.7539795918367345,
+    "p20": 4.934240362811791,
+    "p50": 8.547619047619047,
+    "p90": 13.042857142857143
+  },
+  "g_quantiles": {
+    "p00": 0.3333333333333333,
+    "p05": 0.5421574023115026,
+    "p10": 0.6597916666666667,
+    "p25": 0.7647058823529411,
+    "p50": 0.8373971797884842
+  },
+  "current_q_lo": 5.4,
+  "current_percentile_below": 0.23529411764705882,
+  "current_percentile_at_or_below": 0.23529411764705882,
+  "candidates": [
+    {
+      "label": "current_5.4",
+      "q_lo": 5.4,
+      "pass_nogap": 16,
+      "pass_gap": 12,
+      "greed_gap": 56,
+      "pass_high_nr": 2,
+      "pass_lowg": 0,
+      "greed_lowg": 0,
+      "max_nr_greed": 0.52,
+      "max_re_pass": 4.166666666666667,
+      "bands": {
+        "gray": 1,
+        "darkgreen": 13,
+        "green": 41,
+        "yellow": 1,
+        "yellow_capped": 0,
+        "red": 0
+      },
+      "moved_by_gap": 4
+    },
+    {
+      "label": "p10",
+      "q_lo": 3.1166666666666667,
+      "pass_nogap": 7,
+      "pass_gap": 5,
+      "greed_gap": 63,
+      "pass_high_nr": 1,
+      "pass_lowg": 0,
+      "greed_lowg": 0,
+      "max_nr_greed": 0.6428571428571429,
+      "max_re_pass": 2.5384615384615383,
+      "bands": {
+        "gray": 2,
+        "darkgreen": 14,
+        "green": 45,
+        "yellow": 2,
+        "yellow_capped": 0,
+        "red": 0
+      },
+      "moved_by_gap": 2
+    },
+    {
+      "label": "p15",
+      "q_lo": 3.840686274509804,
+      "pass_nogap": 11,
+      "pass_gap": 8,
+      "greed_gap": 60,
+      "pass_high_nr": 2,
+      "pass_lowg": 0,
+      "greed_lowg": 0,
+      "max_nr_greed": 0.52,
+      "max_re_pass": 3.1666666666666665,
+      "bands": {
+        "gray": 1,
+        "darkgreen": 14,
+        "green": 44,
+        "yellow": 1,
+        "yellow_capped": 0,
+        "red": 0
+      },
+      "moved_by_gap": 3
+    },
+    {
+      "label": "p18",
+      "q_lo": 4.7539795918367345,
+      "pass_nogap": 13,
+      "pass_gap": 11,
+      "greed_gap": 57,
+      "pass_high_nr": 2,
+      "pass_lowg": 0,
+      "greed_lowg": 0,
+      "max_nr_greed": 0.52,
+      "max_re_pass": 3.823529411764706,
+      "bands": {
+        "gray": 1,
+        "darkgreen": 13,
+        "green": 42,
+        "yellow": 1,
+        "yellow_capped": 0,
+        "red": 0
+      },
+      "moved_by_gap": 2
+    },
+    {
+      "label": "p20",
+      "q_lo": 4.934240362811791,
+      "pass_nogap": 14,
+      "pass_gap": 12,
+      "greed_gap": 56,
+      "pass_high_nr": 2,
+      "pass_lowg": 0,
+      "greed_lowg": 0,
+      "max_nr_greed": 0.52,
+      "max_re_pass": 4.166666666666667,
+      "bands": {
+        "gray": 1,
+        "darkgreen": 13,
+        "green": 41,
+        "yellow": 1,
+        "yellow_capped": 0,
+        "red": 0
+      },
+      "moved_by_gap": 2
+    }
+  ],
+  "low_g": {
+    "cut_00": {
+      "cut": 0.0,
+      "n": 0
+    },
+    "cut_10": {
+      "cut": 0.1,
+      "n": 0
+    },
+    "cut_20": {
+      "cut": 0.2,
+      "n": 0
+    },
+    "cut_30": {
+      "cut": 0.3,
+      "n": 0
+    }
+  },
+  "high_nr": {
+    "cut_50": {
+      "cut": 0.5,
+      "n": 3,
+      "ne_p50": 1.9285714285714286,
+      "ne_p90": 2.9857142857142858,
+      "ne_p95": 3.117857142857143,
+      "ne_max": 3.25,
+      "re_p50": 3.0,
+      "re_p95": 5.924999999999999,
+      "re_max": 6.25,
+      "nr_max": 0.6666666666666666,
+      "pass_current": 2
+    },
+    "cut_60": {
+      "cut": 0.6,
+      "n": 2,
+      "ne_p50": 1.8104395604395604,
+      "ne_p90": 1.9049450549450548,
+      "ne_p95": 1.9167582417582418,
+      "ne_max": 1.9285714285714286,
+      "re_p50": 2.769230769230769,
+      "re_p95": 2.9769230769230766,
+      "re_max": 3.0,
+      "nr_max": 0.6666666666666666,
+      "pass_current": 2
+    },
+    "cut_70": {
+      "cut": 0.7,
+      "n": 0
+    }
+  },
+  "separation": null,
+  "current": {
+    "q_lo": 5.4,
+    "pass_nogap": 16,
+    "pass_gap": 12,
+    "greed_gap": 56,
+    "pass_high_nr": 2,
+    "pass_lowg": 0,
+    "greed_lowg": 0,
+    "max_nr_greed": 0.52,
+    "max_re_pass": 4.166666666666667,
+    "bands": {
+      "gray": 1,
+      "darkgreen": 13,
+      "green": 41,
+      "yellow": 1,
+      "yellow_capped": 0,
+      "red": 0
+    },
+    "moved_by_gap": 4
+  },
+  "flags": [
+    "低 G 样本（G/R≤10%）n=0 < 20，放弃派上界无法由数据确定；继续使用 5.4 先验。",
+    "当前规则把 2 名 N/R≥50% 的玩家判为放弃派；若其中有人是全需党，属于漏报。"
+  ],
+  "suggestion": "维持 q_lo=5.4 + gap；本轮样本不足以支持数据驱动的替换。"
+}
